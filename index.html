@@ -960,6 +960,7 @@
   <body>
     <!-- HERO -->
     <section id="hero">
+      <canvas id="heroBg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
       <div class="blob blob1"></div>
       <div class="blob blob2"></div>
       <div class="blob blob3"></div>
@@ -1032,6 +1033,157 @@
     </footer>
 
     <script>
+      /* ── BACKGROUND FLOAT ANIMATION ── */
+      (function () {
+        const canvas = document.getElementById('heroBg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        const SHAPES = ['candlestick'];
+        const COLORS = [
+          [255, 255, 255],   // white
+          [0, 212, 200],     // teal
+          [180, 140, 255],   // lavender
+        ];
+
+        function resize() {
+          canvas.width = canvas.offsetWidth;
+          canvas.height = canvas.offsetHeight;
+        }
+
+        function randomEdgeSpawn(w, h) {
+          const side = Math.floor(Math.random() * 4);
+          if (side === 0) return { x: Math.random() * w, y: h + 60 };
+          if (side === 1) return { x: Math.random() * w, y: -60 };
+          if (side === 2) return { x: -60, y: Math.random() * h };
+          return { x: w + 60, y: Math.random() * h };
+        }
+
+        function makeParticle(fromEdge) {
+          const w = canvas.width, h = canvas.height;
+          const pos = fromEdge ? randomEdgeSpawn(w, h) : { x: Math.random() * w, y: Math.random() * h };
+          const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+          const speed = 0.18 + Math.random() * 0.22;
+          const angle = Math.random() * Math.PI * 2;
+          return {
+            x: pos.x,
+            y: pos.y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 0.08,
+            size: 56 + Math.random() * 128,
+            opacity: 0.04 + Math.random() * 0.07,
+            rotation: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.004,
+            shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+            r: color[0], g: color[1], b: color[2],
+          };
+        }
+
+        function initParticles() {
+          particles = [];
+          const count = Math.max(40, Math.floor((canvas.width * canvas.height) / 16000));
+          for (let i = 0; i < count; i++) particles.push(makeParticle(false));
+        }
+
+        function drawCandlestick(ctx, s) {
+          const bh = s * 0.48, bw = s * 0.32;
+          ctx.beginPath();
+          ctx.moveTo(0, -s * 0.5);
+          ctx.lineTo(0, -bh / 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.rect(-bw / 2, -bh / 2, bw, bh);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, bh / 2);
+          ctx.lineTo(0, s * 0.5);
+          ctx.stroke();
+        }
+
+        function drawDiamond(ctx, s) {
+          const r = s * 0.5;
+          ctx.beginPath();
+          ctx.moveTo(0, -r);
+          ctx.lineTo(r * 0.62, 0);
+          ctx.lineTo(0, r);
+          ctx.lineTo(-r * 0.62, 0);
+          ctx.closePath();
+          ctx.stroke();
+        }
+
+        function drawRing(ctx, s) {
+          ctx.beginPath();
+          ctx.arc(0, 0, s * 0.42, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        function drawHexagon(ctx, s) {
+          const r = s * 0.44;
+          ctx.beginPath();
+          for (let i = 0; i < 6; i++) {
+            const a = (Math.PI / 3) * i - Math.PI / 6;
+            i === 0 ? ctx.moveTo(r * Math.cos(a), r * Math.sin(a))
+                    : ctx.lineTo(r * Math.cos(a), r * Math.sin(a));
+          }
+          ctx.closePath();
+          ctx.stroke();
+        }
+
+        function drawCross(ctx, s) {
+          const r = s * 0.42, t = s * 0.12;
+          ctx.beginPath();
+          ctx.rect(-t / 2, -r, t, r * 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.rect(-r, -t / 2, r * 2, t);
+          ctx.stroke();
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          const margin = 80;
+          const w = canvas.width, h = canvas.height;
+
+          particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rotation += p.rotSpeed;
+
+            if (p.x < -margin || p.x > w + margin || p.y < -margin || p.y > h + margin) {
+              particles[i] = makeParticle(true);
+              return;
+            }
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rotation);
+            ctx.strokeStyle = `rgba(${p.r},${p.g},${p.b},${p.opacity})`;
+            ctx.lineWidth = 1.4;
+
+            if (p.shape === 'candlestick') drawCandlestick(ctx, p.size);
+            else if (p.shape === 'diamond')    drawDiamond(ctx, p.size);
+            else if (p.shape === 'ring')       drawRing(ctx, p.size);
+            else if (p.shape === 'hexagon')    drawHexagon(ctx, p.size);
+            else                               drawCross(ctx, p.size);
+
+            ctx.restore();
+          });
+
+          requestAnimationFrame(animate);
+        }
+
+        resize();
+        initParticles();
+        animate();
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => { resize(); initParticles(); }, 150);
+        });
+      })();
+
+      /* ── WAITLIST ── */
       async function submitWaitlist(inputId, msgId) {
         const input = document.getElementById(inputId);
         const btn = input.nextElementSibling;
