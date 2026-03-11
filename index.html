@@ -1032,19 +1032,44 @@
     </footer>
 
     <script>
-      function submitWaitlist(inputId, msgId) {
+      async function submitWaitlist(inputId, msgId) {
         const input = document.getElementById(inputId);
+        const btn = input.nextElementSibling;
         const msg = document.getElementById(msgId);
         const email = input.value.trim();
+
         if (!email || !email.includes('@')) {
           input.style.borderColor = '#ff4d6d';
           setTimeout(() => (input.style.borderColor = ''), 1200);
           return;
         }
-        // Send to mailto (opens mail client) — replace with real API when ready
-        window.location.href = `mailto:hello@happywick.app?subject=Waitlist&body=Please add me to the waitlist: ${email}`;
-        msg.style.display = 'block';
-        input.value = '';
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        try {
+          const res = await fetch('https://api.staticforms.dev/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              apiKey: 'sf_0cj4l96agdbb822fedle2j3h',
+              email: email,
+              subject: 'New Waitlist Signup – HappyWick'
+            })
+          });
+
+          if (res.ok) {
+            msg.style.display = 'block';
+            input.value = '';
+          } else {
+            alert('Something went wrong. Please try again.');
+          }
+        } catch (e) {
+          alert('Network error. Please try again.');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Get Early Access';
+        }
       }
     </script>
   </body>
