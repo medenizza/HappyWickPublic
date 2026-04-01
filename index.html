@@ -1035,21 +1035,15 @@
             alt="HappyWick logo"
             style="display: block; margin-bottom: 40px"
           />
-          <div class="hero-tag"><span></span> Coming Soon — Be First In</div>
+          <div class="hero-tag"><span></span> Coming Soon</div>
           <h1>Start every<br />morning on <br />the right <em>wick</em>.</h1>
           <p class="hero-sub">
             No more jumping between apps and charts just to figure out what's happening.<br />
             Happy Wick delivers the full market picture in 30 seconds - every morning, before the
             market moves.
           </p>
-          <div class="waitlist">
-            <input type="email" id="heroEmail" placeholder="Enter your email…" />
-            <button onclick="submitWaitlist('heroEmail', 'heroSuccess')">Get Early Access</button>
-          </div>
-          <div class="success-msg" id="heroSuccess">
-            🎉 You're on the list! We'll notify you at launch.
-          </div>
-          <p class="waitlist-note">No spam, ever. We'll only email you when we launch.</p>
+
+
         </div>
 
         <!-- Right — phone + store buttons -->
@@ -1260,46 +1254,7 @@
         });
       })();
 
-      /* ── WAITLIST ── */
-      async function submitWaitlist(inputId, msgId) {
-        const input = document.getElementById(inputId);
-        const btn = input.nextElementSibling;
-        const msg = document.getElementById(msgId);
-        const email = input.value.trim();
 
-        if (!email || !email.includes('@')) {
-          input.style.borderColor = '#ff4d6d';
-          setTimeout(() => (input.style.borderColor = ''), 1200);
-          return;
-        }
-
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
-
-        try {
-          const res = await fetch('https://api.staticforms.dev/submit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              apiKey: 'sf_0cj4l96agdbb822fedle2j3h',
-              email: email,
-              subject: 'New Waitlist Signup – HappyWick'
-            })
-          });
-
-          if (res.ok) {
-            msg.style.display = 'block';
-            input.value = '';
-          } else {
-            alert('Something went wrong. Please try again.');
-          }
-        } catch (e) {
-          alert('Network error. Please try again.');
-        } finally {
-          btn.disabled = false;
-          btn.textContent = 'Get Early Access';
-        }
-      }
     </script>
   </body>
 </html>
