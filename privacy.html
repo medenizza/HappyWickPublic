@@ -82,7 +82,7 @@
       <div class="section">
         <h2>2. Data We Collect</h2>
         <p><strong>a) Account Data</strong><br/>
-        When you sign in with Google, we receive your name, email address, and profile picture via Google OAuth. This data is stored securely by Supabase (our backend provider).</p>
+        When you sign in with Google, we receive your name, email address, and profile picture via Google OAuth. When you sign in with Apple, we receive your name and email address (Apple may provide a private relay email address if you choose to hide your email). This data is stored securely by Supabase (our backend provider).</p>
         <br/>
         <p><strong>b) Feedback Data</strong><br/>
         When you submit feedback through the Support &amp; Feedback form, we collect your user ID, email address, selected category, and message content. This is stored in our Supabase database and is permanently deleted upon account deletion.</p>
@@ -110,6 +110,7 @@
         <ul>
           <li><strong>Supabase</strong> (supabase.com) — authentication and database (EU data center)</li>
           <li><strong>Google OAuth</strong> — sign-in authentication</li>
+          <li><strong>Apple Sign In</strong> — sign-in authentication (iOS only)</li>
           <li><strong>Expo</strong> (expo.dev) — app infrastructure and push notifications</li>
           <li><strong>Groq</strong> — AI summary generation (no personal data is sent to Groq)</li>
           <li><strong>CryptoCompare</strong> (cryptocompare.com) — news feed and social statistics (no personal data is sent)</li>
