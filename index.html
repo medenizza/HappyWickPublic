@@ -3,1286 +3,902 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>HappyWick – Crypto Metrics App</title>
+    <title>Happy Wick – Daily Crypto Market Briefing App</title>
+    <meta
+      name="description"
+      content="Happy Wick gives you the full crypto market picture in 30 seconds — live prices, Fear & Greed Index, portfolio tracking, and wallet alerts. Free on iOS and Android."
+    />
+    <link rel="canonical" href="https://happywick.app/" />
+    <meta name="theme-color" content="#6c47ff" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Happy Wick" />
+    <meta property="og:title" content="Happy Wick – Daily Crypto Market Briefing App" />
+    <meta
+      property="og:description"
+      content="Happy Wick gives you the full crypto market picture in 30 seconds — live prices, Fear & Greed Index, portfolio tracking, and wallet alerts. Free on iOS and Android."
+    />
+    <meta property="og:url" content="https://happywick.app/" />
+    <meta property="og:image" content="https://happywick.app/images/main-banner.png" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Happy Wick – Daily Crypto Market Briefing App" />
+    <meta
+      name="twitter:description"
+      content="Happy Wick gives you the full crypto market picture in 30 seconds — live prices, Fear & Greed Index, portfolio tracking, and wallet alerts. Free on iOS and Android."
+    />
+    <meta name="twitter:image" content="https://happywick.app/images/main-banner.png" />
+    <meta name="twitter:site" content="@HappyWickApp" />
+
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <!-- Bootstrap 5 -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-	
-	<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-<link rel="manifest" href="site.webmanifest" />
-	
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      :root {
-        --teal: #00d4c8;
-        --cyan: #00b4d8;
-        --purple: #7b2ff7;
-        --pink: #a855f7;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: 'Poppins', sans-serif;
-        background: #fff;
-        color: #111;
-        overflow-x: hidden;
-      }
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
 
-      /* ── NAV ── */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        padding: 20px 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-      }
-      .logo-icon {
-        height: 100px;
-        width: auto;
-      }
-      .nav-logo span {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: #fff;
-        letter-spacing: -0.01em;
-      }
-      .nav-links {
-        display: flex;
-        gap: 32px;
-      }
-      .nav-links a {
-        color: rgba(255, 255, 255, 0.75);
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: 0.2s;
-      }
-      .nav-links a:hover {
-        color: #fff;
-      }
-      .nav-cta {
-        background: #fff;
-        color: #7b2ff7;
-        padding: 10px 24px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 0.85rem;
-        text-decoration: none;
-        transition: 0.2s;
-      }
-      .nav-cta:hover {
-        transform: scale(1.04);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-      }
+    <!-- Raleway -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-      /* ── HERO ── */
-      #hero {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #4a00e0 0%, #7b2ff7 35%, #00b4d8 100%);
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-      }
-      /* bg blobs */
-      .blob {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.35;
-        pointer-events: none;
-      }
-      .blob1 {
-        width: 600px;
-        height: 600px;
-        background: #00d4c8;
-        top: -200px;
-        right: -100px;
-      }
-      .blob2 {
-        width: 400px;
-        height: 400px;
-        background: #ff6fd8;
-        bottom: -100px;
-        left: 10%;
-      }
-      .blob3 {
-        width: 300px;
-        height: 300px;
-        background: #4a00e0;
-        top: 30%;
-        right: 30%;
-      }
+    <link rel="stylesheet" href="master-style.css" />
 
-      .hero-inner {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 60px 100px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0;
-      }
-      .hero-left {
-        flex: 1;
-        max-width: 520px;
-      }
-      .hero-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        color: #fff;
-        padding: 6px 16px;
-        border-radius: 50px;
-        font-size: 0.78rem;
-        font-weight: 600;
-        margin-bottom: 28px;
-        letter-spacing: 0.04em;
-      }
-      .hero-tag span {
-        width: 6px;
-        height: 6px;
-        background: #00d4c8;
-        border-radius: 50%;
-        display: inline-block;
-        animation: blink 1.5s infinite;
-      }
-      @keyframes blink {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.2;
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "Happy Wick",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "iOS, Android",
+        "description": "Happy Wick gives you the full crypto market picture in 30 seconds — live prices, Fear & Greed Index, portfolio tracking, and wallet alerts.",
+        "url": "https://happywick.app/",
+        "image": "https://happywick.app/images/main-banner.png",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Happy Wick",
+          "url": "https://happywick.app/"
         }
       }
-      h1 {
-        font-size: clamp(2.8rem, 5vw, 3.4rem);
-        font-weight: 900;
-        color: #fff;
-        line-height: 1.05;
-        letter-spacing: -0.02em;
-        margin-bottom: 20px;
-      }
-      h1 em {
-        font-style: normal;
-        position: relative;
-        display: inline-block;
-        background: linear-gradient(90deg, #00ffb3, #00e5ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      h1 em::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #00d4c8, #00b4d8);
-        border-radius: 2px;
-      }
-      .hero-sub {
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 1.05rem;
-        line-height: 1.7;
-        margin-bottom: 36px;
-        max-width: 420px;
-      }
-
-      /* store buttons */
-      .store-btns {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 28px;
-        flex-wrap: wrap;
-      }
-      .store-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 20px;
-        border-radius: 12px;
-        border: 1.5px solid rgba(123, 47, 247, 0.6);
-        background: rgba(123, 47, 247, 0.15);
-        color: rgba(255, 255, 255, 0.9);
-        text-decoration: none;
-        cursor: pointer;
-        transition: background 0.2s, border-color 0.2s;
-      }
-      .store-btn:hover {
-        background: rgba(123, 47, 247, 0.3);
-        border-color: rgba(123, 47, 247, 0.9);
-      }
-      .store-btn--disabled {
-        border: 1.5px solid rgba(255, 255, 255, 0.15);
-        background: rgba(255, 255, 255, 0.05);
-        color: rgba(255, 255, 255, 0.3);
-        cursor: not-allowed;
-        filter: grayscale(0.6);
-        pointer-events: none;
-      }
-      .store-btn-text {
-        display: flex;
-        flex-direction: column;
-        line-height: 1.2;
-      }
-      .store-btn-sub {
-        font-size: 0.62rem;
-        font-weight: 400;
-        opacity: 0.7;
-      }
-      .store-btn-name {
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-      }
-
-      /* waitlist form */
-      .waitlist {
-        display: flex;
-        gap: 10px;
-        max-width: 420px;
-        flex-wrap: wrap;
-      }
-      .waitlist input {
-        flex: 1;
-        min-width: 200px;
-        padding: 15px 20px;
-        border-radius: 50px;
-        border: none;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        color: #fff;
-        font-size: 0.9rem;
-        font-family: inherit;
-        outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        transition: 0.2s;
-      }
-      .waitlist input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-      }
-      .waitlist input:focus {
-        background: rgba(255, 255, 255, 0.22);
-        border-color: rgba(255, 255, 255, 0.5);
-      }
-      .waitlist button {
-        padding: 15px 28px;
-        border-radius: 50px;
-        border: none;
-        background: #fff;
-        color: #7b2ff7;
-        font-weight: 800;
-        font-size: 0.9rem;
-        cursor: pointer;
-        font-family: inherit;
-        transition: 0.2s;
-        white-space: nowrap;
-      }
-      .waitlist button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-      }
-      .waitlist-note {
-        margin-top: 12px;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.78rem;
-      }
-
-      /* phone col wrapper */
-      .hero-right-col {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 24px;
-        flex-shrink: 0;
-      }
-      .store-btns--center {
-        justify-content: center;
-        margin-bottom: 0;
-      }
-
-      /* phone */
-      .hero-right {
-        flex-shrink: 0;
-        position: relative;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        padding-bottom: 0;
-        margin-left: -60px;
-      }
-      .phone-wrap {
-        position: relative;
-        width: 280px;
-      }
-      .phone-glow {
-        position: absolute;
-        inset: -40px;
-        background: radial-gradient(circle, rgba(0, 212, 200, 0.4), transparent 65%);
-        pointer-events: none;
-        animation: glow 3s ease-in-out infinite;
-      }
-      @keyframes glow {
-        0%,
-        100% {
-          opacity: 0.6;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.06);
-        }
-      }
-      .phone {
-        width: 280px;
-        border-radius: 44px;
-        background: linear-gradient(160deg, #0d1f3c, #071020);
-        border: 2px solid rgba(255, 255, 255, 0.15);
-        box-shadow:
-          0 40px 100px rgba(0, 0, 0, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-        position: relative;
-        z-index: 2;
-        animation: phoneFloat 4s ease-in-out infinite;
-      }
-      @keyframes phoneFloat {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-16px);
-        }
-      }
-      .phone-notch {
-        width: 90px;
-        height: 24px;
-        background: #0d1f3c;
-        border-radius: 0 0 16px 16px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 3;
-      }
-      .phone-content {
-        padding: 16px;
-      }
-      /* phone UI */
-      .p-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-      }
-      .p-title {
-        font-size: 0.7rem;
-        font-weight: 800;
-        color: #fff;
-      }
-      .p-avatar {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #00d4c8, #7b2ff7);
-      }
-      .p-balance-label {
-        font-size: 0.55rem;
-        color: rgba(255, 255, 255, 0.45);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        margin-bottom: 4px;
-      }
-      .p-balance {
-        font-size: 1.6rem;
-        font-weight: 900;
-        color: #fff;
-        margin-bottom: 2px;
-      }
-      .p-change {
-        font-size: 0.6rem;
-        font-weight: 700;
-        color: #00d48a;
-        margin-bottom: 14px;
-      }
-      .p-chart {
-        height: 90px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.04);
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 14px;
-      }
-      .p-chart svg {
-        width: 100%;
-        height: 100%;
-      }
-      .p-coins {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .p-coin {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 10px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.05);
-      }
-      .p-coin-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
-      .p-coin-name {
-        font-size: 0.6rem;
-        font-weight: 700;
-        color: #fff;
-        flex: 1;
-      }
-      .p-coin-price {
-        font-size: 0.58rem;
-        color: rgba(255, 255, 255, 0.5);
-      }
-      .p-coin-pct {
-        font-size: 0.58rem;
-        font-weight: 700;
-      }
-      .up {
-        color: #00d48a;
-      }
-      .down {
-        color: #ff4d6d;
-      }
-      .dot-b {
-        background: #00b4d8;
-      }
-      .dot-g {
-        background: #00d48a;
-      }
-      .dot-r {
-        background: #ff4d6d;
-      }
-      .dot-y {
-        background: #f59e0b;
-      }
-
-      /* bull/bear beside phone */
-      .mascot-bull {
-        position: absolute;
-        bottom: 160px;
-        left: -130px;
-        width: 210px;
-        filter: drop-shadow(0 20px 30px rgba(0, 212, 200, 0.3));
-        animation: mBull 3.5s ease-in-out infinite;
-        transform-origin: bottom;
-      }
-      .mascot-bear {
-        position: absolute;
-        bottom: 0;
-        right: -90px;
-        width: 135px;
-        filter: drop-shadow(0 20px 30px rgba(255, 77, 109, 0.25));
-        animation: mBear 4s ease-in-out infinite;
-        transform-origin: bottom;
-      }
-      @keyframes mBull {
-        0%,
-        100% {
-          transform: translateY(0) rotate(-2deg);
-        }
-        50% {
-          transform: translateY(-14px) rotate(2deg);
-        }
-      }
-      @keyframes mBear {
-        0%,
-        100% {
-          transform: translateY(0) rotate(2deg);
-        }
-        50% {
-          transform: translateY(-10px) rotate(-2deg);
-        }
-      }
-
-      /* wave */
-      .wave-divider {
-        display: block;
-        width: 100%;
-        overflow: hidden;
-        line-height: 0;
-        background: linear-gradient(135deg, #4a00e0 0%, #7b2ff7 35%, #00b4d8 100%);
-      }
-      .wave-divider svg {
-        display: block;
-        width: 100%;
-      }
-
-      /* ── FEATURES ── */
-      #features {
-        padding: 90px 60px;
-        max-width: 1200px;
-        margin: 0 auto;
-        text-align: center;
-      }
-      .sec-eyebrow {
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: var(--purple);
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        margin-bottom: 12px;
-      }
-      .sec-title {
-        font-size: clamp(2rem, 3.5vw, 2.8rem);
-        font-weight: 900;
-        color: #111;
-        letter-spacing: -0.02em;
-        margin-bottom: 16px;
-        line-height: 1.1;
-      }
-      .sec-title .grad {
-        background: linear-gradient(90deg, var(--purple), var(--cyan));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .sec-sub {
-        color: #666;
-        font-size: 1rem;
-        max-width: 520px;
-        margin: 0 auto 70px;
-        line-height: 1.7;
-      }
-
-      .feats {
-        display: flex;
-        flex-direction: column;
-        gap: 90px;
-        margin-top: 30px;
-      }
-      .feat-row {
-        display: flex;
-        align-items: center;
-        gap: 80px;
-        text-align: left;
-      }
-      .feat-row.rev {
-        flex-direction: row-reverse;
-      }
-      .feat-visual {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .feat-phone-mini {
-        width: 200px;
-        border-radius: 32px;
-        background: linear-gradient(160deg, #0d1f3c, #071020);
-        border: 1.5px solid rgba(123, 47, 247, 0.3);
-        box-shadow: 0 30px 80px rgba(123, 47, 247, 0.2);
-        overflow: hidden;
-        padding: 16px;
-      }
-      .feat-phone-mini-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      .feat-text {
-        flex: 1;
-      }
-      .feat-number {
-        font-size: 3rem;
-        font-weight: 900;
-        background: linear-gradient(135deg, var(--purple), var(--cyan));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 1;
-        margin-bottom: 10px;
-        opacity: 0.25;
-      }
-      .feat-title-big {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: #111;
-        margin-bottom: 12px;
-        letter-spacing: -0.01em;
-        line-height: 1.2;
-      }
-      .feat-body {
-        color: #555;
-        font-size: 1rem;
-        line-height: 1.75;
-        max-width: 380px;
-      }
-      .feat-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 18px;
-        background: linear-gradient(135deg, rgba(123, 47, 247, 0.1), rgba(0, 180, 216, 0.1));
-        border: 1px solid rgba(123, 47, 247, 0.2);
-        color: var(--purple);
-        padding: 7px 16px;
-        border-radius: 50px;
-        font-size: 0.78rem;
-        font-weight: 700;
-      }
-
-      /* mini chart styles */
-      .mini-bar-row {
-        display: flex;
-        align-items: flex-end;
-        gap: 4px;
-        height: 50px;
-        padding: 4px;
-      }
-      .mini-bar {
-        flex: 1;
-        border-radius: 3px 3px 0 0;
-        background: linear-gradient(180deg, var(--teal), var(--purple));
-      }
-      .mini-list-item {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 8px;
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.05);
-      }
-      .mini-list-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-      }
-      .mini-list-name {
-        font-size: 0.55rem;
-        font-weight: 700;
-        color: #fff;
-        flex: 1;
-      }
-      .mini-list-val {
-        font-size: 0.52rem;
-        color: rgba(255, 255, 255, 0.6);
-      }
-      .mini-list-chg {
-        font-size: 0.52rem;
-        font-weight: 700;
-      }
-      .alert-item {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        padding: 8px 10px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.05);
-        margin-bottom: 6px;
-      }
-      .alert-icon {
-        width: 22px;
-        height: 22px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        flex-shrink: 0;
-      }
-      .alert-text {
-        flex: 1;
-      }
-      .alert-title {
-        font-size: 0.55rem;
-        font-weight: 700;
-        color: #fff;
-      }
-      .alert-sub {
-        font-size: 0.5rem;
-        color: rgba(255, 255, 255, 0.45);
-      }
-      .alert-time {
-        font-size: 0.48rem;
-        color: rgba(255, 255, 255, 0.3);
-      }
-      .sentiment-wrap {
-        padding: 4px;
-      }
-      .sent-label {
-        font-size: 0.5rem;
-        color: rgba(255, 255, 255, 0.45);
-        text-align: center;
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-      }
-      .sent-bar-outer {
-        height: 10px;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 5px;
-        overflow: hidden;
-        margin-bottom: 8px;
-      }
-      .sent-bar-inner {
-        height: 100%;
-        border-radius: 5px;
-        background: linear-gradient(90deg, #ff4d6d, #f59e0b, #00d48a);
-      }
-      .sent-tags {
-        display: flex;
-        gap: 4px;
-        flex-wrap: wrap;
-      }
-      .sent-tag {
-        font-size: 0.48rem;
-        padding: 3px 7px;
-        border-radius: 50px;
-        background: rgba(0, 212, 200, 0.12);
-        color: var(--teal);
-        border: 1px solid rgba(0, 212, 200, 0.2);
-        font-weight: 600;
-      }
-
-      /* wave2 */
-      .wave2-wrap {
-        background: #fff;
-        overflow: hidden;
-        line-height: 0;
-      }
-      .wave2-wrap svg {
-        display: block;
-        width: 100%;
-      }
-
-      /* ── CTA SECTION ── */
-      #waitlist2 {
-        background: linear-gradient(135deg, #4a00e0 0%, #7b2ff7 50%, #00b4d8 100%);
-        padding: 100px 60px;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-      }
-      .cta-blob1 {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        background: rgba(0, 212, 200, 0.2);
-        border-radius: 50%;
-        filter: blur(80px);
-        top: -200px;
-        right: -100px;
-        pointer-events: none;
-      }
-      .cta-blob2 {
-        position: absolute;
-        width: 400px;
-        height: 400px;
-        background: rgba(255, 111, 216, 0.15);
-        border-radius: 50%;
-        filter: blur(80px);
-        bottom: -150px;
-        left: -50px;
-        pointer-events: none;
-      }
-      .cta-inner {
-        position: relative;
-        z-index: 2;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      .cta-mascots {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        gap: 20px;
-        margin-bottom: 30px;
-      }
-      .cta-bull {
-        width: 120px;
-        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        animation: mBull 3.5s ease-in-out infinite;
-      }
-      .cta-bear {
-        width: 108px;
-        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        animation: mBear 4s ease-in-out infinite;
-      }
-      #waitlist2 h2 {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 900;
-        color: #fff;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        margin-bottom: 14px;
-      }
-      #waitlist2 p {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1rem;
-        margin-bottom: 36px;
-        line-height: 1.7;
-      }
-      .cta-form {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        max-width: 460px;
-        margin: 0 auto;
-        flex-wrap: wrap;
-      }
-      .cta-form input {
-        flex: 1;
-        min-width: 200px;
-        padding: 15px 22px;
-        border-radius: 50px;
-        border: none;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        color: #fff;
-        font-size: 0.9rem;
-        font-family: inherit;
-        outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-      }
-      .cta-form input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-      }
-      .cta-form input:focus {
-        background: rgba(255, 255, 255, 0.22);
-      }
-      .cta-form button {
-        padding: 15px 28px;
-        border-radius: 50px;
-        border: none;
-        background: #fff;
-        color: #7b2ff7;
-        font-weight: 800;
-        font-size: 0.9rem;
-        cursor: pointer;
-        font-family: inherit;
-        transition: 0.2s;
-        white-space: nowrap;
-      }
-      .cta-form button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-      }
-      .cta-note {
-        margin-top: 14px;
-        color: rgba(255, 255, 255, 0.45);
-        font-size: 0.75rem;
-      }
-
-      /* ── FOOTER ── */
-      footer {
-        background: #0a0a12;
-        padding: 32px 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-      .foot-logo {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-      }
-      .foot-logo span {
-        font-size: 1rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, #fff, var(--teal));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      footer p {
-        font-size: 0.78rem;
-        color: rgba(255, 255, 255, 0.25);
-      }
-      .foot-links {
-        display: flex;
-        gap: 22px;
-      }
-      .foot-links a {
-        color: rgba(255, 255, 255, 0.3);
-        text-decoration: none;
-        font-size: 0.78rem;
-        transition: 0.2s;
-      }
-      .foot-links a:hover {
-        color: var(--teal);
-      }
-
-      /* success msg */
-      .success-msg {
-        display: none;
-        margin-top: 14px;
-        color: #00d4c8;
-        font-size: 0.85rem;
-        font-weight: 600;
-      }
-
-      @media (max-width: 900px) {
-        nav {
-          padding: 16px 24px;
-          flex-direction: column;
-          align-items: center;
-          gap: 12px;
-        }
-        .nav-links {
-          display: none;
-        }
-        .hero-inner {
-          flex-direction: column;
-          text-align: center;
-          padding: 40px 24px 0;
-        }
-        .hero-tag {
-          margin-top: 20px;
-        }
-        .store-btns {
-          justify-content: center;
-          margin-bottom: 30px;
-        }
-        .hero-sub {
-          margin: 0 auto 36px;
-        }
-        .waitlist {
-          justify-content: center;
-        }
-        .waitlist-note {
-          text-align: center;
-        }
-        .hero-right {
-          position: relative;
-          margin-bottom: 0;
-          margin-left: 0;
-        }
-        .mascot-bull {
-          width: 110px;
-          bottom: 220px;
-          left: -60px;
-        }
-        .mascot-bear {
-          display: none;
-        }
-        .logo-icon {
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .waitlist {
-          flex-direction: column;
-        }
-        .waitlist input,
-        .waitlist button {
-          width: 100%;
-        }
-        #features {
-          padding: 70px 24px;
-        }
-        .feat-row,
-        .feat-row.rev {
-          flex-direction: column;
-          gap: 40px;
-          text-align: center;
-        }
-        .feat-body {
-          max-width: 100%;
-          margin: 0 auto;
-        }
-        #waitlist2 {
-          padding: 70px 24px;
-        }
-        footer {
-          padding: 24px;
-          flex-direction: column;
-          text-align: center;
-        }
-      }
-    </style>
+    </script>
   </head>
   <body>
-    <!-- HERO -->
-    <section id="hero">
-      <canvas id="heroBg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
-      <div class="blob blob1"></div>
-      <div class="blob blob2"></div>
-      <div class="blob blob3"></div>
-
-      <div class="hero-inner">
-        <!-- Left -->
-        <div class="hero-left">
-          <img
-            src="happy-wick-logo.png"
-            class="logo-icon"
-            alt="HappyWick logo"
-            style="display: block; margin-bottom: 40px"
-          />
-          <div class="hero-tag"><span></span> Now on iOS & Android</div>
-          <h1>Start every<br />morning on <br />the right <em>wick</em>.</h1>
-          <p class="hero-sub">
-            No more jumping between apps and charts just to figure out what's happening.<br />
-            Happy Wick delivers the full market picture in 30 seconds - every morning, before the
-            market moves.
-          </p>
-
-          <a href="https://play.google.com/store/apps/details?id=com.happywick.minigames" target="_blank" rel="noreferrer">
-            <img
-                src="banner.png"
-                alt="Happy Wick Minigames"
-                style="width: 100%; max-width: 300px; height: auto; display: block;"
-            />
-          </a>
-
+    <!-- ══ NAVBAR ══ -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand navbar-brand-custom" href="#hero">
+          <img src="images/happy-wick-header.png" alt="Happy Wick" class="navbar-logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navContent"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navContent">
+          <ul class="navbar-nav mx-auto gap-lg-4 py-3 py-lg-0">
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="#metrics">Metrics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="#market">Market</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="#portfolio">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-custom" href="#alerts">Alerts</a>
+            </li>
+          </ul>
+          <a href="#cta" class="btn btn-brand">Download Free</a>
         </div>
+      </div>
+    </nav>
 
-        <!-- Right — phone + store buttons -->
-        <div class="hero-right-col">
-          <div class="hero-right">
-            <div class="mascot-bull">
-              <img
-                src="bull-icon.png"
-                style="width: 210px; filter: drop-shadow(0 20px 30px rgba(0, 212, 200, 0.3))"
-                alt="Bull mascot"
-              />
+    <!-- ══ HERO ══ -->
+    <section id="hero">
+      <div class="container">
+        <div class="hero-banner d-flex align-items-center">
+          <div class="hero-left-content">
+            <img src="images/happy-wick-logo.png" alt="HappyWick logo" class="hero-logo" />
+            <h1 class="hero-heading">Start every morning on the right wick.</h1>
+
+            <p class="store-text">
+              Download the HappyWick app <strong>for free</strong> on your mobile device.
+            </p>
+            <div class="store-badges">
+              <a
+                href="https://apps.apple.com/us/app/happy-wick-daily-crypto-brief/id6763779729"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-badge"
+              >
+                <svg
+                  width="219"
+                  height="64"
+                  viewBox="0 0 219 64"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M210.53 0H9.01777C4.51469 0 0.976562 3.5466 0.976562 8.06045V55.9395C0.976562 60.2922 4.67552 64 9.01777 64H210.53C215.033 64 218.572 60.4534 218.572 55.9395V8.06045C218.732 3.5466 215.033 0 210.53 0Z"
+                    fill="none"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M47.2202 32.1682C47.2202 28.9682 48.9802 26.0882 51.8602 24.3282C49.9402 21.9282 47.0602 20.4882 44.0202 20.3282C40.8202 20.0082 37.6202 22.2482 36.0202 22.2482C34.2602 22.2482 31.7002 20.3282 28.9802 20.4882C25.3002 20.6482 22.1002 22.5682 20.3402 25.6082C16.6602 31.8482 19.3802 41.1282 22.9002 46.2482C24.6602 48.8082 26.7402 51.5282 29.4602 51.3682C32.1802 51.2082 33.1402 49.7682 36.3402 49.7682C39.5402 49.7682 40.5002 51.3682 43.2202 51.3682C46.1002 51.3682 47.8602 48.8082 49.6202 46.4082C50.9002 44.6482 51.8602 42.7282 52.5002 40.6482C49.4602 39.0482 47.2202 35.8482 47.2202 32.1682Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M41.9357 16.9663C43.5357 15.2063 44.3357 12.8063 44.0157 10.4062C41.6157 10.7263 39.3757 11.6863 37.7757 13.4463C36.1757 15.2063 35.3757 17.4463 35.5357 19.6863C38.0957 20.0063 40.3357 18.8863 41.9357 16.9663Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M73.9381 13.4569C75.2181 13.4569 76.4981 13.9369 77.2981 14.7369C78.0981 15.5369 78.5781 16.9769 78.4181 18.0969C78.4181 21.1369 76.8181 22.8969 73.9381 22.8969H70.5781V13.2969H73.9381V13.4569ZM72.0181 21.7769H73.7781C74.7381 21.7769 75.5381 21.4569 76.1781 20.8169C76.8181 20.1769 77.1381 19.2169 76.9781 18.4169C77.1381 17.4569 76.8181 16.6569 76.1781 16.0169C75.5381 15.3769 74.7381 14.7369 73.7781 14.8969H72.0181V21.7769Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M80.1808 19.3753C80.0208 18.0953 80.6608 16.8153 81.7808 16.1753C82.9008 15.5353 84.3408 15.5353 85.3008 16.1753C86.2608 16.8153 87.0608 18.0953 86.9008 19.3753C87.0608 20.6553 86.4208 21.9353 85.3008 22.5753C84.1808 23.2153 82.7408 23.2153 81.6208 22.5753C80.6608 21.9353 80.0208 20.8153 80.1808 19.3753ZM85.4608 19.3753C85.4608 17.7753 84.8208 16.9753 83.5408 16.9753C82.2608 16.9753 81.6208 17.9353 81.6208 19.3753C81.6208 20.9753 82.2608 21.9353 83.5408 21.9353C84.8208 21.9353 85.4608 20.9753 85.4608 19.3753Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M96.0156 23.0438H94.5756L92.9756 17.7638L91.3756 23.0438H89.9356L88.0156 15.8438H89.4556L90.7356 21.2838L92.3356 15.8438H93.6156L95.0556 21.2838H95.2156L96.4956 15.8438H97.9356L96.0156 23.0438Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M99.6953 15.8553H101.135V16.9753H101.295C101.615 16.1753 102.575 15.6953 103.375 15.6953C104.015 15.6953 104.815 15.8553 105.295 16.4953C105.775 16.9753 105.935 17.7753 105.935 18.4153V23.0553H104.495V18.7353C104.495 17.6153 104.015 16.9753 102.895 16.9753C102.415 16.9753 101.935 17.1353 101.615 17.4553C101.295 17.7753 101.135 18.2553 101.135 18.7353V22.8953H99.6953V15.8553Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M108.016 12.9688H109.456V23.0487H108.016V12.9688Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M111.376 19.3753C111.216 18.0953 111.856 16.8153 112.976 16.1753C114.096 15.5353 115.536 15.5353 116.496 16.1753C117.616 16.8153 118.256 18.0953 118.096 19.3753C118.256 20.6553 117.616 21.9353 116.496 22.5753C115.376 23.2153 113.936 23.2153 112.816 22.5753C111.856 21.9353 111.216 20.8153 111.376 19.3753ZM116.816 19.3753C116.816 17.7753 116.176 16.9753 114.896 16.9753C113.616 16.9753 112.976 17.9353 112.976 19.3753C112.976 20.9753 113.616 21.9353 114.896 21.9353C116.016 21.9353 116.816 20.9753 116.816 19.3753Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M119.695 20.9753C119.695 19.6953 120.655 18.8953 122.415 18.8953L124.335 18.7353V18.0953C124.335 17.2953 123.855 16.9753 122.895 16.9753C122.095 16.9753 121.615 17.2953 121.455 17.7753H120.015C120.175 16.4953 121.295 15.6953 122.895 15.6953C124.655 15.6953 125.775 16.6553 125.775 18.0953V23.0553H124.335V22.0953H124.175C123.695 22.8953 122.895 23.2153 121.935 23.2153C121.295 23.2153 120.655 23.0553 120.335 22.7353C120.015 22.2553 119.695 21.6153 119.695 20.9753ZM124.335 20.3353V19.8553L122.575 20.0153C121.615 20.0153 121.135 20.4953 121.135 20.9753C121.135 21.6153 121.775 21.9353 122.415 21.9353C122.895 21.9353 123.375 21.7753 123.695 21.6153C124.015 21.2953 124.335 20.8153 124.335 20.3353Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M127.531 19.3687C127.531 17.1287 128.651 15.6887 130.571 15.6887C131.531 15.6887 132.331 16.1687 132.811 16.9687H132.971V12.9688H134.411V23.0487H132.971V21.9287H132.811C132.331 22.7287 131.531 23.2087 130.571 23.2087C128.811 23.2087 127.531 21.7687 127.531 19.3687ZM129.131 19.3687C129.131 20.9687 129.931 21.7687 131.051 21.7687C132.171 21.7687 132.971 20.8087 132.971 19.3687C132.971 17.9287 132.171 16.9687 131.051 16.9687C129.771 16.9687 129.131 17.9287 129.131 19.3687Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M140.181 19.3753C140.021 18.0953 140.661 16.8153 141.781 16.1753C142.901 15.5353 144.341 15.5353 145.301 16.1753C146.421 16.8153 147.061 18.0953 146.901 19.3753C147.061 20.6553 146.421 21.9353 145.301 22.5753C144.181 23.2153 142.741 23.2153 141.621 22.5753C140.661 21.9353 140.181 20.8153 140.181 19.3753ZM145.621 19.3753C145.621 17.7753 144.981 16.9753 143.701 16.9753C142.421 16.9753 141.781 17.9353 141.781 19.3753C141.781 20.9753 142.421 21.9353 143.701 21.9353C144.821 21.9353 145.621 20.9753 145.621 19.3753Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M148.977 15.8553H150.417V16.9753H150.577C150.897 16.1753 151.857 15.6953 152.657 15.6953C153.297 15.6953 154.097 15.8553 154.577 16.4953C155.057 16.9753 155.217 17.7753 155.217 18.4153V23.0553H153.777V18.7353C153.777 17.6153 153.297 16.9753 152.177 16.9753C151.697 16.9753 151.217 17.1353 150.897 17.4553C150.577 17.7753 150.417 18.2553 150.417 18.7353V22.8953H148.977V15.8553Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M163.056 14.0938V15.8537H164.656V17.1337H163.056V20.8138C163.056 21.6137 163.376 21.9337 164.016 21.9337C164.176 21.9337 164.336 21.9337 164.496 21.9337V23.0537C164.176 23.0537 164.016 23.0537 163.696 23.0537C162.096 23.0537 161.456 22.5737 161.456 21.1337V17.1337H160.336V15.8537H161.456V14.0938H163.056Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M166.578 12.9688H168.018V16.9687H168.178C168.498 16.1687 169.458 15.5287 170.418 15.6887C171.058 15.6887 171.858 15.8487 172.338 16.4887C172.818 16.9687 172.978 17.7687 172.978 18.4087V23.0487H171.538V18.7287C171.538 17.6087 171.058 16.9687 169.938 16.9687C169.458 16.9687 168.978 17.1287 168.658 17.4487C168.338 17.7687 168.178 18.2487 168.178 18.7287V22.8887H166.738L166.578 12.9688Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M181.132 21.1353C180.812 22.4153 179.372 23.3753 177.932 23.2153C176.972 23.2153 176.012 22.8953 175.372 22.0953C174.732 21.4553 174.412 20.4953 174.572 19.5353C174.412 18.5753 174.732 17.6153 175.372 16.8153C176.012 16.0153 176.972 15.6953 177.932 15.6953C180.012 15.6953 181.132 17.1353 181.132 19.3753V19.8553H176.012C176.012 20.3353 176.172 20.9753 176.492 21.2953C176.812 21.6153 177.452 21.9353 177.932 21.9353C178.572 22.0953 179.372 21.6153 179.692 21.1353H181.132ZM176.012 18.7353H179.692C179.692 18.2553 179.532 17.7753 179.212 17.4553C178.892 17.1353 178.412 16.9753 177.932 16.9753C177.452 16.9753 176.972 17.1353 176.652 17.4553C176.332 17.7753 176.012 18.2553 176.012 18.7353Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M82.7378 42.8922H75.2178L73.4578 48.3322H70.2578L77.2978 28.4922H80.6578L87.8578 48.3322H84.6578L82.7378 42.8922ZM76.0178 40.4922H82.0978L79.0578 31.6922H78.8978L76.0178 40.4922Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M103.373 41.1317C103.373 45.6117 100.973 48.4917 97.2934 48.4917C95.3734 48.6517 93.6134 47.5317 92.8134 45.9317V53.1317H89.7734V33.9317H92.6534V36.3317C93.6134 34.7317 95.3734 33.7717 97.2934 33.7717C100.813 33.6117 103.373 36.6517 103.373 41.1317ZM100.173 41.1317C100.173 38.2517 98.7334 36.3317 96.3334 36.3317C94.0934 36.3317 92.4934 38.2517 92.4934 41.1317C92.4934 44.0117 94.0934 45.9317 96.3334 45.9317C98.7334 45.9317 100.173 44.0117 100.173 41.1317Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M119.217 41.1317C119.217 45.6117 116.817 48.4917 113.137 48.4917C111.217 48.6517 109.457 47.5317 108.657 45.9317V53.1317H105.617V33.9317H108.497V36.3317C109.457 34.7317 111.217 33.7717 113.137 33.7717C116.817 33.6117 119.217 36.6517 119.217 41.1317ZM116.177 41.1317C116.177 38.2517 114.737 36.3317 112.337 36.3317C110.097 36.3317 108.497 38.2517 108.497 41.1317C108.497 44.0117 110.097 45.9317 112.337 45.9317C114.737 45.9317 116.177 44.0117 116.177 41.1317Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M129.775 42.7241C129.935 44.6441 131.855 45.9241 134.575 45.9241C137.135 45.9241 138.895 44.6441 138.895 42.8841C138.895 41.2841 137.775 40.4841 135.215 39.8441L132.655 39.2041C128.975 38.2441 127.375 36.6441 127.375 33.9241C127.375 30.5641 130.415 28.1641 134.575 28.1641C138.735 28.1641 141.615 30.5641 141.775 33.9241H138.735C138.575 32.0041 136.975 30.7241 134.575 30.7241C132.175 30.7241 130.575 32.0041 130.575 33.7641C130.575 35.2041 131.695 36.0041 134.255 36.6441L136.495 37.1241C140.495 38.0841 142.255 39.6841 142.255 42.5641C142.255 46.2441 139.215 48.6441 134.575 48.6441C130.095 48.6441 127.215 46.4041 127.055 42.7241H129.775Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M148.335 30.3984V33.7584H151.055V36.1584H148.335V44.1584C148.335 45.4384 148.815 45.9184 150.095 45.9184C150.415 45.9184 150.735 45.9184 151.055 45.9184V48.3184C150.575 48.4784 149.935 48.4784 149.455 48.4784C146.575 48.4784 145.455 47.3584 145.455 44.6384V36.1584H143.375V33.7584H145.455V30.3984H148.335Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M152.82 41.1256C152.82 36.6456 155.54 33.7656 159.7 33.7656C163.86 33.7656 166.58 36.6456 166.58 41.1256C166.58 45.7656 163.86 48.4856 159.7 48.4856C155.38 48.4856 152.82 45.6056 152.82 41.1256ZM163.54 41.1256C163.54 37.9256 162.1 36.1656 159.7 36.1656C157.3 36.1656 155.86 37.9256 155.86 41.1256C155.86 44.3256 157.3 46.0856 159.7 46.0856C162.1 46.0856 163.54 44.1656 163.54 41.1256Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M168.98 33.7652H171.86V36.3252C172.18 34.7252 173.78 33.6052 175.38 33.7652C175.7 33.7652 176.02 33.7652 176.34 33.9252V36.6452C175.86 36.4852 175.54 36.3252 175.06 36.3252C174.26 36.3252 173.3 36.6452 172.82 37.2852C172.34 37.9252 171.86 38.8852 171.86 39.6852V48.3252H168.82L168.98 33.7652Z"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M190.097 44.0016C189.777 46.5616 187.057 48.4816 183.857 48.4816C179.697 48.4816 176.977 45.6016 176.977 41.1216C176.977 36.6416 179.537 33.6016 183.697 33.6016C187.697 33.6016 190.257 36.3216 190.257 40.8016V41.7616H180.017V41.9216C179.857 43.0416 180.337 44.0016 180.977 44.8016C181.777 45.6016 182.737 46.0816 183.857 45.9216C185.297 46.0816 186.737 45.2816 187.217 43.8416L190.097 44.0016ZM180.017 39.6816H187.217C187.217 38.7216 186.897 37.7616 186.257 37.1216C185.617 36.4816 184.657 36.0016 183.697 36.0016C182.737 36.0016 181.777 36.3216 181.137 37.1216C180.337 37.7616 180.017 38.7216 180.017 39.6816Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://play.google.com/store/apps/details?id=com.darko.medenica.happywick"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-badge"
+              >
+                <svg
+                  width="219"
+                  height="64"
+                  viewBox="0 0 219 64"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_17580_62811)">
+                    <rect x="0.976562" width="217.6" height="64" rx="8" fill="none" />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M209.457 63.36H8.97656C4.49656 63.36 0.976562 59.84 0.976562 55.36V8C0.976562 3.68 4.65656 0 8.97656 0H209.457C213.937 0 217.457 3.52 217.457 8V55.52C217.457 59.84 213.937 63.36 209.457 63.36Z"
+                      fill="none"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M77.0959 17.0416C77.0959 18.3216 76.6159 19.4416 75.9759 20.2416C75.0159 21.0416 73.7359 21.5216 72.2959 21.5216C71.0159 21.5216 69.7359 21.0416 68.7759 20.0816C67.8159 19.1216 67.3359 18.0016 67.3359 16.5616C67.3359 15.1216 67.8159 14.0016 68.7759 13.0416C69.7359 12.0816 70.8559 11.6016 72.2959 11.6016C72.9359 11.6016 73.5759 11.7616 74.2159 12.0816C75.0159 12.2416 75.4959 12.5616 75.8159 13.0416L75.0159 13.8416C74.3759 13.2016 73.4159 12.7216 72.2959 12.7216C71.3359 12.7216 70.3759 13.2016 69.7359 13.8416C68.9359 14.4816 68.6159 15.4416 68.6159 16.5616C68.6159 17.6816 68.9359 18.6416 69.7359 19.2816C70.5359 19.9216 71.3359 20.4016 72.2959 20.4016C73.4159 20.4016 74.2159 20.0816 75.0159 19.2816C75.4959 18.8016 75.8159 18.1616 75.8159 17.3616H72.2959V16.2416H76.9359C77.0959 16.5616 77.0959 16.7216 77.0959 17.0416Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M72.2928 11.7984C70.9057 11.7984 69.8367 12.2574 68.9142 13.1799C67.9918 14.1023 67.5328 15.1714 67.5328 16.5584C67.5328 17.9455 67.9918 19.0146 68.9142 19.937C69.8343 20.8571 71.0623 21.3184 72.2928 21.3184C73.68 21.3184 74.9082 20.8589 75.8292 20.0977C76.4377 19.3303 76.8928 18.2598 76.8928 17.0384C76.8928 16.8745 76.8923 16.7719 76.8755 16.6713C76.8639 16.6017 76.8437 16.5294 76.8052 16.4384H72.4928V17.1584H76.0128V17.3584C76.0128 18.217 75.6676 18.9065 75.1542 19.4199C74.7396 19.8345 74.318 20.1315 73.8485 20.3235C73.3792 20.5156 72.8723 20.5984 72.2928 20.5984C71.2618 20.5984 70.4162 20.0812 69.6079 19.4346C68.7445 18.7439 68.4128 17.7153 68.4128 16.5584C68.4128 15.4055 68.7422 14.3799 69.5992 13.6892C70.2695 13.0228 71.2743 12.5184 72.2928 12.5184C73.389 12.5184 74.3394 12.9555 75.0091 13.5593L75.5506 13.0178C75.2669 12.6611 74.8523 12.4103 74.1736 12.2746L74.1473 12.2693L74.1234 12.2573C73.5078 11.9496 72.8983 11.7984 72.2928 11.7984ZM68.6314 12.897C69.629 11.8994 70.7999 11.3984 72.2928 11.3984C72.9593 11.3984 73.6217 11.5633 74.2783 11.8877C75.1038 12.0577 75.6276 12.4001 75.9792 12.9275L76.0702 13.0639L75.0128 14.1213L74.8714 13.9799C74.2653 13.3737 73.3548 12.9184 72.2928 12.9184C71.3952 12.9184 70.4839 13.3702 69.8742 13.9799L69.8585 13.9956C69.1219 14.5848 68.8128 15.4753 68.8128 16.5584C68.8128 17.6416 69.1212 18.533 69.8577 19.1223C70.6495 19.7556 71.4038 20.1984 72.2928 20.1984C72.8333 20.1984 73.2864 20.1213 73.6971 19.9533C74.1076 19.7854 74.486 19.5224 74.8714 19.137C75.2771 18.7313 75.5575 18.2069 75.6055 17.5584H72.0928V16.0384H77.0564L77.1117 16.149C77.1982 16.322 77.246 16.4612 77.2701 16.6056C77.2928 16.742 77.2928 16.8765 77.2928 17.0285V17.0384C77.2928 18.3686 76.7942 19.5318 76.129 20.3634L76.1164 20.3791L76.1008 20.3921C75.1035 21.2232 73.7778 21.7184 72.2928 21.7184C70.9633 21.7184 69.6313 21.2198 68.6314 20.2199C67.6338 19.2223 67.1328 18.0514 67.1328 16.5584C67.1328 15.0655 67.6338 13.8946 68.6314 12.897Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M84.3969 13.0456H80.0769V16.0856H84.0769V17.2056H80.0769V20.2456H84.3969V21.3656H78.7969V11.7656H84.3969V13.0456Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M78.5938 11.5625H84.5938V13.2425H80.2738V15.8825H84.2738V17.4025H80.2738V20.0425H84.5938V21.5625H78.5938V11.5625ZM78.9938 11.9625V21.1625H84.1938V20.4425H79.8738V17.0025H83.8738V16.2825H79.8738V12.8425H84.1938V11.9625H78.9938Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M89.6953 21.3656H88.4153V13.0456H85.6953V11.7656H92.4153V13.0456H89.6953V21.3656Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M85.4922 11.5625H92.6122V13.2425H89.8922V21.5625H88.2122V13.2425H85.4922V11.5625ZM85.8922 11.9625V12.8425H88.6122V21.1625H89.4922V12.8425H92.2122V11.9625H85.8922Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M97.1641 21.3656V11.7656H98.444V21.3656H97.1641Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M96.9609 11.5625H98.6409V21.5625H96.9609V11.5625ZM97.3609 11.9625V21.1625H98.2409V11.9625H97.3609Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M103.891 21.3656H102.611V13.0456H99.8906V11.7656H106.611V13.0456H103.891V21.3656Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M99.6875 11.5625H106.808V13.2425H104.088V21.5625H102.408V13.2425H99.6875V11.5625ZM100.088 11.9625V12.8425H102.808V21.1625H103.688V12.8425H106.408V11.9625H100.088Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M119.035 20.0816C118.075 21.0416 116.955 21.5216 115.515 21.5216C114.075 21.5216 112.955 21.0416 111.995 20.0816C111.035 19.1216 110.555 18.0016 110.555 16.5616C110.555 15.1216 111.035 14.0016 111.995 13.0416C112.955 12.0816 114.075 11.6016 115.515 11.6016C116.955 11.6016 118.075 12.0816 119.035 13.0416C119.995 14.0016 120.475 15.1216 120.475 16.5616C120.475 18.0016 119.995 19.1216 119.035 20.0816ZM112.955 19.2816C113.595 19.9216 114.555 20.4016 115.515 20.4016C116.475 20.4016 117.435 20.0816 118.075 19.2816C118.875 18.6416 119.195 17.6816 119.195 16.5616C119.195 15.4416 118.875 14.6416 118.235 13.8416C117.595 13.2016 116.635 12.7216 115.675 12.7216C114.555 12.7216 113.595 13.2016 112.955 13.8416C112.155 14.6416 111.835 15.4416 111.835 16.5616C111.835 17.6816 112.155 18.6416 112.955 19.2816Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M115.512 11.7984C114.125 11.7984 113.055 12.2574 112.133 13.1799C111.211 14.1023 110.752 15.1714 110.752 16.5584C110.752 17.9455 111.211 19.0146 112.133 19.937C113.055 20.8594 114.125 21.3184 115.512 21.3184C116.899 21.3184 117.968 20.8594 118.89 19.937C119.813 19.0146 120.272 17.9455 120.272 16.5584C120.272 15.1714 119.813 14.1023 118.89 13.1799C117.968 12.2574 116.899 11.7984 115.512 11.7984ZM111.85 12.897C112.848 11.8994 114.019 11.3984 115.512 11.3984C117.004 11.3984 118.175 11.8994 119.173 12.897C120.171 13.8946 120.672 15.0655 120.672 16.5584C120.672 18.0514 120.171 19.2223 119.173 20.2199C118.175 21.2174 117.004 21.7184 115.512 21.7184C114.019 21.7184 112.848 21.2174 111.85 20.2199C110.853 19.2223 110.352 18.0514 110.352 16.5584C110.352 15.0655 110.853 13.8946 111.85 12.897ZM112.81 13.697C113.484 13.0231 114.494 12.5184 115.672 12.5184C116.694 12.5184 117.703 13.0267 118.373 13.697L118.389 13.7127L118.388 13.7135C119.054 14.5464 119.392 15.3899 119.392 16.5584C119.392 17.7075 119.064 18.7301 118.214 19.4207C117.526 20.2682 116.507 20.5984 115.512 20.5984C114.493 20.5984 113.488 20.0941 112.818 19.4277C111.961 18.737 111.632 17.7114 111.632 16.5584C111.632 15.9789 111.714 15.4721 111.906 15.0027C112.099 14.5332 112.396 14.1116 112.81 13.697ZM115.672 12.9184C114.61 12.9184 113.699 13.3737 113.093 13.9799C112.708 14.3652 112.445 14.7437 112.277 15.1542C112.109 15.5648 112.032 16.018 112.032 16.5584C112.032 17.6416 112.34 18.533 113.077 19.1223L113.094 19.1361L113.093 19.137C113.703 19.7467 114.614 20.1984 115.512 20.1984C116.43 20.1984 117.324 19.8931 117.915 19.1535L117.929 19.1361L117.947 19.1223C118.683 18.533 118.992 17.6416 118.992 16.5584C118.992 15.4911 118.691 14.7362 118.082 13.9721C117.473 13.3663 116.565 12.9184 115.672 12.9184Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M122.266 21.3656V11.7656H123.706L128.346 19.2856H128.506L128.346 17.3656V11.7656L129.626 11.7656V21.3656H128.346L123.386 13.5256V15.4456V21.3656H122.266Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M122.062 11.5625H123.814L128.259 18.7659L128.142 17.3625L128.142 11.5625L129.822 11.5625V21.5625H128.232L123.582 14.2127V21.5625H122.062V11.5625ZM122.463 11.9625V21.1625H123.182V12.8323L128.453 21.1625H129.422V11.9625H128.542V17.3542L128.72 19.4825H128.231L123.591 11.9625H122.463Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M110.255 35.195C106.575 35.195 103.375 38.075 103.375 41.915C103.375 45.755 106.415 48.635 110.255 48.635C114.095 48.635 117.135 45.755 117.135 41.915C117.135 38.075 114.095 35.195 110.255 35.195ZM110.255 46.075C108.175 46.075 106.415 44.315 106.415 41.915C106.415 39.515 108.175 37.755 110.255 37.755C112.335 37.755 114.095 39.355 114.095 41.915C114.095 44.315 112.335 46.075 110.255 46.075ZM95.3747 35.195C91.5347 35.195 88.4947 38.075 88.4947 41.915C88.4947 45.755 91.5347 48.635 95.3747 48.635C99.2147 48.635 102.255 45.755 102.255 41.915C102.255 38.075 99.0547 35.195 95.3747 35.195ZM95.3747 46.075C93.2947 46.075 91.5347 44.315 91.5347 41.915C91.5347 39.515 93.2947 37.755 95.3747 37.755C97.4547 37.755 99.2147 39.355 99.2147 41.915C99.2147 44.315 97.4547 46.075 95.3747 46.075ZM77.6147 37.275V40.155H84.4947C84.3347 41.755 83.6947 42.875 82.8947 43.675C81.9347 44.635 80.3347 45.755 77.6147 45.755C73.2947 45.755 70.0947 42.395 70.0947 38.075C70.0947 33.755 73.4547 30.395 77.6147 30.395C79.8547 30.395 81.6147 31.355 82.8947 32.475L84.9747 30.395C83.2147 28.795 80.9747 27.515 77.7747 27.515C71.8547 27.515 67.0547 32.155 67.0547 37.915C67.0547 43.675 72.0147 48.315 77.7747 48.315C80.9747 48.315 83.3747 47.355 85.1347 45.435C87.0547 43.515 87.6947 40.955 87.6947 38.715C87.6947 38.075 87.6947 37.435 87.5347 36.955H77.6147V37.275ZM150.255 39.515C149.615 38.075 148.015 35.195 144.335 35.195C140.815 35.195 137.935 37.915 137.935 41.915C137.935 45.755 140.815 48.635 144.655 48.635C147.855 48.635 149.615 46.715 150.415 45.595L148.015 43.995C147.215 45.115 146.255 45.915 144.655 45.915C143.215 45.915 142.095 45.275 141.295 43.835L150.415 40.155L150.255 39.515ZM140.975 41.755C140.975 39.195 143.055 37.755 144.495 37.755C145.615 37.755 146.735 38.395 147.055 39.195L140.975 41.755ZM133.455 48.315H136.495V28.475H133.455V48.315ZM128.655 36.795C127.855 35.995 126.575 35.355 124.975 35.355C121.615 35.355 118.415 38.395 118.415 42.075C118.415 45.915 121.615 48.795 124.975 48.795C126.575 48.795 127.855 48.155 128.495 47.195H128.655V48.155C128.655 50.715 127.215 52.155 124.975 52.155C123.215 52.155 121.935 50.875 121.615 49.755L119.055 50.875C119.855 52.635 121.775 54.875 125.135 54.875C128.655 54.875 131.695 52.795 131.695 47.835V35.675H128.815V36.795H128.655ZM125.135 46.075C123.055 46.075 121.295 44.315 121.295 42.075C121.295 39.675 123.055 37.915 125.135 37.915C127.215 37.915 128.815 39.675 128.815 42.075C128.815 44.315 127.215 46.075 125.135 46.075ZM164.335 28.475H157.135V48.315H160.175V40.795H164.335C167.695 40.795 170.895 38.395 170.895 34.715C170.895 30.875 167.535 28.475 164.335 28.475ZM164.335 38.075H160.015V31.355H164.335C166.575 31.355 167.855 33.115 167.855 34.715C167.855 36.155 166.575 38.075 164.335 38.075ZM182.895 35.195C180.655 35.195 178.415 36.155 177.615 38.235L180.335 39.355C180.975 38.235 181.935 37.915 183.055 37.915C184.655 37.915 186.255 38.875 186.255 40.475V40.635C185.775 40.315 184.495 39.835 183.055 39.835C180.175 39.835 177.295 41.435 177.295 44.315C177.295 47.035 179.695 48.635 182.255 48.635C184.335 48.635 185.455 47.675 186.095 46.715H186.255V48.315H189.135V40.635C188.975 37.115 186.255 35.195 182.895 35.195ZM182.575 46.075C181.615 46.075 180.175 45.595 180.175 44.475C180.175 42.875 181.935 42.395 183.375 42.395C184.655 42.395 185.295 42.715 186.095 43.035C185.775 44.795 184.175 46.075 182.575 46.075ZM199.535 35.675L196.175 44.315H196.015L192.495 35.675H189.295L194.575 47.675L191.375 54.235H194.575L202.735 35.515H199.535V35.675ZM172.495 48.315H175.535V28.475H172.495V48.315Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M40.1078 29.8778L44.8778 25.1078L22.5383 12.2288L40.1078 29.8778ZM18.0068 11.1953C16.9733 11.7518 16.2578 12.7853 16.2578 14.0573V49.1168C16.2578 50.3888 16.9733 51.4223 18.0068 51.8993L38.3588 31.5473L18.0068 11.1953ZM51.7943 29.1623L47.1038 26.4593L41.8568 31.5473L47.1038 36.7148L51.8738 34.0118C53.3048 32.8988 53.3048 30.2753 51.7943 29.1623ZM22.5383 50.8658L44.8778 38.0663L40.1078 33.2963L22.5383 50.8658Z"
+                      fill="currentColor"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_17580_62811">
+                      <rect x="0.976562" width="217.6" height="64" rx="8" fill="currentColor" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </a>
             </div>
-            <div class="phone-wrap">
-              <img
-                src="app-1.png?v1"
-                alt="HappyWick App"
-                style="
-                  height: 580px;
-                  width: auto;
-                  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.35));
-                "
-              />
-            </div>
-            <div class="mascot-bear">
-              <img
-                src="bear-icon.png"
-                style="width: 155px; filter: drop-shadow(0 20px 30px rgba(255, 77, 109, 0.25))"
-                alt="Bear mascot"
-              />
-            </div>
-          </div>
-          <div class="store-btns store-btns--center">
-            <a class="store-btn" href="https://apps.apple.com/us/app/happy-wick-daily-crypto-brief/id6763779729" target="_blank" rel="noopener noreferrer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-              <div class="store-btn-text">
-                <span class="store-btn-sub">Download on the</span>
-                <span class="store-btn-name">App Store</span>
-              </div>
-            </a>
-            <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.darko.medenica.happywick" target="_blank" rel="noopener noreferrer">
-              <svg width="20" height="20" viewBox="0 0 28.99 31.99" xmlns="http://www.w3.org/2000/svg"><g><g><path d="M13.54 15.28.12 29.34a3.66 3.66 0 0 0 5.33 2.16l15.1-8.6Z" style="fill:#ea4335"/><path d="m27.11 12.89-6.53-3.74-7.35 6.45 7.38 7.28 6.48-3.7a3.54 3.54 0 0 0 1.5-4.79 3.62 3.62 0 0 0-1.5-1.5z" style="fill:#fbbc04"/><path d="M.12 2.66a3.57 3.57 0 0 0-.12.92v24.84a3.57 3.57 0 0 0 .12.92L14 15.64Z" style="fill:#4285f4"/><path d="m13.64 16 6.94-6.85L5.5.51A3.73 3.73 0 0 0 3.63 0 3.64 3.64 0 0 0 .12 2.65Z" style="fill:#34a853"/></g></g></svg>
-              <div class="store-btn-text">
-                <span class="store-btn-sub">Get it on</span>
-                <span class="store-btn-name">Google Play</span>
-              </div>
-            </a>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px;margin-bottom:40px;">
-            <a href="https://x.com/HappyWickApp" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:7px;padding:7px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);font-size:0.75rem;text-decoration:none;letter-spacing:0.03em;transition:background 0.2s,border-color 0.2s,color 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.borderColor='rgba(255,255,255,0.25)';this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='rgba(255,255,255,0.65)'">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L2.012 2.25h6.945l4.262 5.636 5.025-5.636zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              Follow us on X
-            </a>
-            <p style="color:rgba(255,255,255,0.25);font-size:0.7rem;text-align:center;margin:0;letter-spacing:0.04em;">© 2026 HappyWick by guiXpert. All rights reserved.</p>
+
+            <p class="hero-disclaimer">
+              Cryptocurrency is a highly volatile asset — you may lose some or all of your invested
+              capital, and nothing in this app constitutes financial, investment, legal or tax
+              advice. Always do your own research. Happy Wick does not offer trading, exchange or
+              custody services — we are strictly a read-only market data and wallet-tracking app,
+              and we will never ask for your private keys or seed phrase. See our
+              <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a> for more
+              details.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ══ METRICS ══ -->
+    <section id="metrics" class="empty-section">
+      <div class="container text-center">
+        <div class="section-eyebrow">Live Metrics</div>
+        <h2 class="section-title">
+          Every signal that moves the market, <span class="text-grad">in one glance</span>
+        </h2>
+        <p class="section-sub mb-5" style="max-width: 760px">
+          Every morning, Happy Wick greets you with a personalized briefing — total market cap, 24h
+          change, and an animated bull or bear that mirrors the market's mood. Track the Fear &amp;
+          Greed Index, BTC's MVRV ratio, the US Dollar Index (DXY) and the 10-Year Treasury Yield at
+          a glance, then let our AI turn it all into one plain-English summary of what's actually
+          happening. Dig deeper with BTC dominance, futures long/short ratio and open interest, or
+          check stablecoin dominance and a full breakdown of USDT, USDC, DAI and more. And when you
+          want the full story, our news feed pulls the latest headlines from 50+ trusted sources —
+          all in one place, in under 30 seconds.
+        </p>
 
+        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4 text-start">
+          <div class="col">
+            <div class="metric-card">
+              <h3>BTC MVRV Ratio</h3>
+              <img src="images/mvrv.png" alt="BTC MVRV Ratio" class="metric-card-img" />
+              <p>
+                MVRV compares Bitcoin's market cap to its realized cap — what holders actually paid
+                for their coins. Below 1.0 signals holders are underwater (historically a buy zone),
+                1.0–2.0 is fair value, 2.0–3.5 is overvalued, and above 3.5 has historically marked
+                market tops.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="metric-card">
+              <h3>DXY — US Dollar Index</h3>
+              <img src="images/dxy.png" alt="DXY US Dollar Index" class="metric-card-img" />
+              <p>
+                The ICE U.S. Dollar Index tracks dollar strength against a basket of major
+                currencies (euro, yen, pound and more). It moves opposite to crypto — a
+                strengthening dollar tends to pull money out of Bitcoin, while a weakening dollar
+                often fuels rallies.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="metric-card">
+              <h3>US 10-Year Yield</h3>
+              <img src="images/us10y.png" alt="US 10-Year Treasury Yield" class="metric-card-img" />
+              <p>
+                The US 10-Year Treasury Yield is the benchmark interest rate on US government bonds.
+                Rising yields make "safe" bonds more attractive and pull money away from risk assets
+                like Bitcoin; falling yields tend to push investors back toward crypto.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ MARKET ══ -->
+    <section id="market" class="empty-section">
+      <div class="container text-center">
+        <div class="section-eyebrow">Market Watch</div>
+        <h2 class="section-title">Live prices, <span class="text-grad">ranked and ready</span></h2>
+        <p class="section-sub mb-5" style="max-width: 760px">
+          Follow live BTC, ETH and SOL prices with support &amp; resistance levels, Bitcoin's
+          200-week SMA and real-time Ethereum gas fees, then flip through the day's Top Gainers and
+          Losers. Trade the trend with tokenized stocks like SPYx, QQQx and TSLAx, each backed by an
+          Analyst Consensus based on ratings from Wall Street analysts. Search and sort the full top
+          250 coins by price or market cap, or scan the color-coded Heatmap to spot momentum at a
+          glance — then tap into any asset for its full chart history, ATH/ATL range, supply data
+          and description.
+        </p>
+
+        <img
+          src="images/btc-eth-sol.png"
+          alt="BTC, ETH and SOL price cards"
+          class="market-showcase-img"
+        />
+      </div>
+    </section>
+
+    <!-- ══ PORTFOLIO ══ -->
+    <section id="portfolio" class="empty-section">
+      <div class="container text-center">
+        <div class="section-eyebrow">Portfolio Tracker</div>
+        <h2 class="section-title">Your holdings, <span class="text-grad">always in view</span></h2>
+        <p class="section-sub" style="max-width: 760px">
+          See your total value, how much you've invested, and your 24h change at a glance, with a
+          goal bar that tracks your progress toward the sell targets you've set. Switch between a
+          historical performance chart in USD and BTC, or a portfolio breakdown with a weighted
+          Portfolio Grade (A+ to F) that scores your holdings by risk — from blue-chip assets down
+          to speculative micro-caps. Every holding shows your average buy price, live P/L, and a
+          progress bar toward its target price, and logging a new buy or sell takes seconds.
+        </p>
+
+        <img
+          src="images/portfolio.png"
+          alt="Portfolio Tracker"
+          class="market-showcase-img mb-4"
+          style="max-width: 900px"
+        />
+
+        <p class="section-sub mb-5" style="max-width: 760px">
+          Add a Bitcoin address or an EVM wallet and Happy Wick tracks it across 9 chains —
+          Ethereum, Arbitrum, Base, Optimism, Polygon, Ink, Immutable, Linea and zkSync — showing
+          your balance, token holdings and recent transactions on every one. The moment a new
+          transaction lands on any wallet, you get a push notification, so you always know what's
+          moving before you even open the app. No wallet connection required — just paste in any
+          public address you want to keep an eye on.
+        </p>
+        <img
+          src="images/portfolio-1.png"
+          alt="Portfolio Tracker"
+          class="market-showcase-img mb-4"
+        />
+        <img src="images/tokens.png" alt="Tracked tokens" class="market-showcase-img" />
+      </div>
+    </section>
+
+    <!-- ══ ALERTS ══ -->
+    <section id="alerts" class="empty-section">
+      <div class="container text-center">
+        <div class="section-eyebrow">Smart Alerts</div>
+        <h2 class="section-title">Never <span class="text-grad">miss a move</span></h2>
+        <p class="section-sub mb-2" style="max-width: 760px">
+          Happy Wick keeps watch even when you're not looking. Get a daily briefing notification
+          summarizing Fear &amp; Greed, BTC dominance and total market cap at the time you choose,
+          plus instant alerts the moment sentiment swings 10+ points, BTC dominance crosses a key
+          threshold, or any coin moves 5% or more in a day. Add your wallets and you'll know the
+          second a new transaction lands — no more manually checking a block explorer. Support and
+          resistance breakouts on BTC, ETH and SOL are flagged automatically too, so you never miss
+          the moment a level gives way.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══ MASCOTS / MINIGAME ══ -->
+    <section id="mascots">
+      <div class="container">
+        <div class="mascot-banner text-center">
+          <div class="section-eyebrow">Our Mascots</div>
+          <div class="hero-heading-wrap d-inline-block">
+            <img
+              src="images/bull-icon.png"
+              alt="Bull mascot"
+              class="hero-mascot hero-mascot-bull"
+            />
+            <h2 class="section-title">Meet the <span class="text-grad">Bull &amp; Bear</span></h2>
+            <img
+              src="images/bear-icon.png"
+              alt="Bear mascot"
+              class="hero-mascot hero-mascot-bear"
+            />
+          </div>
+          <p class="section-sub" style="max-width: 700px; color: #000">
+            Every trader knows the rush of a bull market and the dread of a bear one — so who better
+            to guide your mornings than the two animals that gave crypto its language? Our bull and
+            bear aren't just mascots, they react to whatever the market is actually doing that day,
+            cheering through green candles and bracing through red ones, right alongside you. And
+            when the market's quiet and there's nothing left to check, unwind with our free, ad-free
+            arcade minigame on Android —
+            <a
+              href="https://play.google.com/store/apps/details?id=com.happywick.minigames"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-link"
+              >download it here</a
+            >, because sometimes the best trade is knowing when to just relax.
+          </p>
+          <p class="foot-dev" style="color: #000; margin-top: 20px">
+            Developed by
+            <img src="images/giuXpert-black.png" alt="giuXpert" class="foot-dev-logo" />
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CTA ══ -->
+    <section id="cta" class="bg-brand-gradient">
+      <div class="container">
+        <h2>Start every morning on the right wick.</h2>
+        <p>Download Happy Wick — 100% <strong>FREE</strong> on iOS and Android today.</p>
+        <div class="store-badges justify-content-center">
+          <a
+            href="https://apps.apple.com/us/app/happy-wick-daily-crypto-brief/id6763779729"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="store-badge"
+          >
+            <svg
+              width="219"
+              height="64"
+              viewBox="0 0 219 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M210.53 0H9.01777C4.51469 0 0.976562 3.5466 0.976562 8.06045V55.9395C0.976562 60.2922 4.67552 64 9.01777 64H210.53C215.033 64 218.572 60.4534 218.572 55.9395V8.06045C218.732 3.5466 215.033 0 210.53 0Z"
+                fill="none"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M47.2202 32.1682C47.2202 28.9682 48.9802 26.0882 51.8602 24.3282C49.9402 21.9282 47.0602 20.4882 44.0202 20.3282C40.8202 20.0082 37.6202 22.2482 36.0202 22.2482C34.2602 22.2482 31.7002 20.3282 28.9802 20.4882C25.3002 20.6482 22.1002 22.5682 20.3402 25.6082C16.6602 31.8482 19.3802 41.1282 22.9002 46.2482C24.6602 48.8082 26.7402 51.5282 29.4602 51.3682C32.1802 51.2082 33.1402 49.7682 36.3402 49.7682C39.5402 49.7682 40.5002 51.3682 43.2202 51.3682C46.1002 51.3682 47.8602 48.8082 49.6202 46.4082C50.9002 44.6482 51.8602 42.7282 52.5002 40.6482C49.4602 39.0482 47.2202 35.8482 47.2202 32.1682Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M41.9357 16.9663C43.5357 15.2063 44.3357 12.8063 44.0157 10.4062C41.6157 10.7263 39.3757 11.6863 37.7757 13.4463C36.1757 15.2063 35.3757 17.4463 35.5357 19.6863C38.0957 20.0063 40.3357 18.8863 41.9357 16.9663Z"
+                fill="currentColor"
+              />
+              <path
+                d="M73.9381 13.4569C75.2181 13.4569 76.4981 13.9369 77.2981 14.7369C78.0981 15.5369 78.5781 16.9769 78.4181 18.0969C78.4181 21.1369 76.8181 22.8969 73.9381 22.8969H70.5781V13.2969H73.9381V13.4569ZM72.0181 21.7769H73.7781C74.7381 21.7769 75.5381 21.4569 76.1781 20.8169C76.8181 20.1769 77.1381 19.2169 76.9781 18.4169C77.1381 17.4569 76.8181 16.6569 76.1781 16.0169C75.5381 15.3769 74.7381 14.7369 73.7781 14.8969H72.0181V21.7769Z"
+                fill="currentColor"
+              />
+              <path
+                d="M80.1808 19.3753C80.0208 18.0953 80.6608 16.8153 81.7808 16.1753C82.9008 15.5353 84.3408 15.5353 85.3008 16.1753C86.2608 16.8153 87.0608 18.0953 86.9008 19.3753C87.0608 20.6553 86.4208 21.9353 85.3008 22.5753C84.1808 23.2153 82.7408 23.2153 81.6208 22.5753C80.6608 21.9353 80.0208 20.8153 80.1808 19.3753ZM85.4608 19.3753C85.4608 17.7753 84.8208 16.9753 83.5408 16.9753C82.2608 16.9753 81.6208 17.9353 81.6208 19.3753C81.6208 20.9753 82.2608 21.9353 83.5408 21.9353C84.8208 21.9353 85.4608 20.9753 85.4608 19.3753Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M96.0156 23.0438H94.5756L92.9756 17.7638L91.3756 23.0438H89.9356L88.0156 15.8438H89.4556L90.7356 21.2838L92.3356 15.8438H93.6156L95.0556 21.2838H95.2156L96.4956 15.8438H97.9356L96.0156 23.0438Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M99.6953 15.8553H101.135V16.9753H101.295C101.615 16.1753 102.575 15.6953 103.375 15.6953C104.015 15.6953 104.815 15.8553 105.295 16.4953C105.775 16.9753 105.935 17.7753 105.935 18.4153V23.0553H104.495V18.7353C104.495 17.6153 104.015 16.9753 102.895 16.9753C102.415 16.9753 101.935 17.1353 101.615 17.4553C101.295 17.7753 101.135 18.2553 101.135 18.7353V22.8953H99.6953V15.8553Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M108.016 12.9688H109.456V23.0487H108.016V12.9688Z"
+                fill="currentColor"
+              />
+              <path
+                d="M111.376 19.3753C111.216 18.0953 111.856 16.8153 112.976 16.1753C114.096 15.5353 115.536 15.5353 116.496 16.1753C117.616 16.8153 118.256 18.0953 118.096 19.3753C118.256 20.6553 117.616 21.9353 116.496 22.5753C115.376 23.2153 113.936 23.2153 112.816 22.5753C111.856 21.9353 111.216 20.8153 111.376 19.3753ZM116.816 19.3753C116.816 17.7753 116.176 16.9753 114.896 16.9753C113.616 16.9753 112.976 17.9353 112.976 19.3753C112.976 20.9753 113.616 21.9353 114.896 21.9353C116.016 21.9353 116.816 20.9753 116.816 19.3753Z"
+                fill="currentColor"
+              />
+              <path
+                d="M119.695 20.9753C119.695 19.6953 120.655 18.8953 122.415 18.8953L124.335 18.7353V18.0953C124.335 17.2953 123.855 16.9753 122.895 16.9753C122.095 16.9753 121.615 17.2953 121.455 17.7753H120.015C120.175 16.4953 121.295 15.6953 122.895 15.6953C124.655 15.6953 125.775 16.6553 125.775 18.0953V23.0553H124.335V22.0953H124.175C123.695 22.8953 122.895 23.2153 121.935 23.2153C121.295 23.2153 120.655 23.0553 120.335 22.7353C120.015 22.2553 119.695 21.6153 119.695 20.9753ZM124.335 20.3353V19.8553L122.575 20.0153C121.615 20.0153 121.135 20.4953 121.135 20.9753C121.135 21.6153 121.775 21.9353 122.415 21.9353C122.895 21.9353 123.375 21.7753 123.695 21.6153C124.015 21.2953 124.335 20.8153 124.335 20.3353Z"
+                fill="currentColor"
+              />
+              <path
+                d="M127.531 19.3687C127.531 17.1287 128.651 15.6887 130.571 15.6887C131.531 15.6887 132.331 16.1687 132.811 16.9687H132.971V12.9688H134.411V23.0487H132.971V21.9287H132.811C132.331 22.7287 131.531 23.2087 130.571 23.2087C128.811 23.2087 127.531 21.7687 127.531 19.3687ZM129.131 19.3687C129.131 20.9687 129.931 21.7687 131.051 21.7687C132.171 21.7687 132.971 20.8087 132.971 19.3687C132.971 17.9287 132.171 16.9687 131.051 16.9687C129.771 16.9687 129.131 17.9287 129.131 19.3687Z"
+                fill="currentColor"
+              />
+              <path
+                d="M140.181 19.3753C140.021 18.0953 140.661 16.8153 141.781 16.1753C142.901 15.5353 144.341 15.5353 145.301 16.1753C146.421 16.8153 147.061 18.0953 146.901 19.3753C147.061 20.6553 146.421 21.9353 145.301 22.5753C144.181 23.2153 142.741 23.2153 141.621 22.5753C140.661 21.9353 140.181 20.8153 140.181 19.3753ZM145.621 19.3753C145.621 17.7753 144.981 16.9753 143.701 16.9753C142.421 16.9753 141.781 17.9353 141.781 19.3753C141.781 20.9753 142.421 21.9353 143.701 21.9353C144.821 21.9353 145.621 20.9753 145.621 19.3753Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M148.977 15.8553H150.417V16.9753H150.577C150.897 16.1753 151.857 15.6953 152.657 15.6953C153.297 15.6953 154.097 15.8553 154.577 16.4953C155.057 16.9753 155.217 17.7753 155.217 18.4153V23.0553H153.777V18.7353C153.777 17.6153 153.297 16.9753 152.177 16.9753C151.697 16.9753 151.217 17.1353 150.897 17.4553C150.577 17.7753 150.417 18.2553 150.417 18.7353V22.8953H148.977V15.8553Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M163.056 14.0938V15.8537H164.656V17.1337H163.056V20.8138C163.056 21.6137 163.376 21.9337 164.016 21.9337C164.176 21.9337 164.336 21.9337 164.496 21.9337V23.0537C164.176 23.0537 164.016 23.0537 163.696 23.0537C162.096 23.0537 161.456 22.5737 161.456 21.1337V17.1337H160.336V15.8537H161.456V14.0938H163.056Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M166.578 12.9688H168.018V16.9687H168.178C168.498 16.1687 169.458 15.5287 170.418 15.6887C171.058 15.6887 171.858 15.8487 172.338 16.4887C172.818 16.9687 172.978 17.7687 172.978 18.4087V23.0487H171.538V18.7287C171.538 17.6087 171.058 16.9687 169.938 16.9687C169.458 16.9687 168.978 17.1287 168.658 17.4487C168.338 17.7687 168.178 18.2487 168.178 18.7287V22.8887H166.738L166.578 12.9688Z"
+                fill="currentColor"
+              />
+              <path
+                d="M181.132 21.1353C180.812 22.4153 179.372 23.3753 177.932 23.2153C176.972 23.2153 176.012 22.8953 175.372 22.0953C174.732 21.4553 174.412 20.4953 174.572 19.5353C174.412 18.5753 174.732 17.6153 175.372 16.8153C176.012 16.0153 176.972 15.6953 177.932 15.6953C180.012 15.6953 181.132 17.1353 181.132 19.3753V19.8553H176.012C176.012 20.3353 176.172 20.9753 176.492 21.2953C176.812 21.6153 177.452 21.9353 177.932 21.9353C178.572 22.0953 179.372 21.6153 179.692 21.1353H181.132ZM176.012 18.7353H179.692C179.692 18.2553 179.532 17.7753 179.212 17.4553C178.892 17.1353 178.412 16.9753 177.932 16.9753C177.452 16.9753 176.972 17.1353 176.652 17.4553C176.332 17.7753 176.012 18.2553 176.012 18.7353Z"
+                fill="currentColor"
+              />
+              <path
+                d="M82.7378 42.8922H75.2178L73.4578 48.3322H70.2578L77.2978 28.4922H80.6578L87.8578 48.3322H84.6578L82.7378 42.8922ZM76.0178 40.4922H82.0978L79.0578 31.6922H78.8978L76.0178 40.4922Z"
+                fill="currentColor"
+              />
+              <path
+                d="M103.373 41.1317C103.373 45.6117 100.973 48.4917 97.2934 48.4917C95.3734 48.6517 93.6134 47.5317 92.8134 45.9317V53.1317H89.7734V33.9317H92.6534V36.3317C93.6134 34.7317 95.3734 33.7717 97.2934 33.7717C100.813 33.6117 103.373 36.6517 103.373 41.1317ZM100.173 41.1317C100.173 38.2517 98.7334 36.3317 96.3334 36.3317C94.0934 36.3317 92.4934 38.2517 92.4934 41.1317C92.4934 44.0117 94.0934 45.9317 96.3334 45.9317C98.7334 45.9317 100.173 44.0117 100.173 41.1317Z"
+                fill="currentColor"
+              />
+              <path
+                d="M119.217 41.1317C119.217 45.6117 116.817 48.4917 113.137 48.4917C111.217 48.6517 109.457 47.5317 108.657 45.9317V53.1317H105.617V33.9317H108.497V36.3317C109.457 34.7317 111.217 33.7717 113.137 33.7717C116.817 33.6117 119.217 36.6517 119.217 41.1317ZM116.177 41.1317C116.177 38.2517 114.737 36.3317 112.337 36.3317C110.097 36.3317 108.497 38.2517 108.497 41.1317C108.497 44.0117 110.097 45.9317 112.337 45.9317C114.737 45.9317 116.177 44.0117 116.177 41.1317Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M129.775 42.7241C129.935 44.6441 131.855 45.9241 134.575 45.9241C137.135 45.9241 138.895 44.6441 138.895 42.8841C138.895 41.2841 137.775 40.4841 135.215 39.8441L132.655 39.2041C128.975 38.2441 127.375 36.6441 127.375 33.9241C127.375 30.5641 130.415 28.1641 134.575 28.1641C138.735 28.1641 141.615 30.5641 141.775 33.9241H138.735C138.575 32.0041 136.975 30.7241 134.575 30.7241C132.175 30.7241 130.575 32.0041 130.575 33.7641C130.575 35.2041 131.695 36.0041 134.255 36.6441L136.495 37.1241C140.495 38.0841 142.255 39.6841 142.255 42.5641C142.255 46.2441 139.215 48.6441 134.575 48.6441C130.095 48.6441 127.215 46.4041 127.055 42.7241H129.775Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M148.335 30.3984V33.7584H151.055V36.1584H148.335V44.1584C148.335 45.4384 148.815 45.9184 150.095 45.9184C150.415 45.9184 150.735 45.9184 151.055 45.9184V48.3184C150.575 48.4784 149.935 48.4784 149.455 48.4784C146.575 48.4784 145.455 47.3584 145.455 44.6384V36.1584H143.375V33.7584H145.455V30.3984H148.335Z"
+                fill="currentColor"
+              />
+              <path
+                d="M152.82 41.1256C152.82 36.6456 155.54 33.7656 159.7 33.7656C163.86 33.7656 166.58 36.6456 166.58 41.1256C166.58 45.7656 163.86 48.4856 159.7 48.4856C155.38 48.4856 152.82 45.6056 152.82 41.1256ZM163.54 41.1256C163.54 37.9256 162.1 36.1656 159.7 36.1656C157.3 36.1656 155.86 37.9256 155.86 41.1256C155.86 44.3256 157.3 46.0856 159.7 46.0856C162.1 46.0856 163.54 44.1656 163.54 41.1256Z"
+                fill="currentColor"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M168.98 33.7652H171.86V36.3252C172.18 34.7252 173.78 33.6052 175.38 33.7652C175.7 33.7652 176.02 33.7652 176.34 33.9252V36.6452C175.86 36.4852 175.54 36.3252 175.06 36.3252C174.26 36.3252 173.3 36.6452 172.82 37.2852C172.34 37.9252 171.86 38.8852 171.86 39.6852V48.3252H168.82L168.98 33.7652Z"
+                fill="currentColor"
+              />
+              <path
+                d="M190.097 44.0016C189.777 46.5616 187.057 48.4816 183.857 48.4816C179.697 48.4816 176.977 45.6016 176.977 41.1216C176.977 36.6416 179.537 33.6016 183.697 33.6016C187.697 33.6016 190.257 36.3216 190.257 40.8016V41.7616H180.017V41.9216C179.857 43.0416 180.337 44.0016 180.977 44.8016C181.777 45.6016 182.737 46.0816 183.857 45.9216C185.297 46.0816 186.737 45.2816 187.217 43.8416L190.097 44.0016ZM180.017 39.6816H187.217C187.217 38.7216 186.897 37.7616 186.257 37.1216C185.617 36.4816 184.657 36.0016 183.697 36.0016C182.737 36.0016 181.777 36.3216 181.137 37.1216C180.337 37.7616 180.017 38.7216 180.017 39.6816Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+
+          <a
+            href="https://play.google.com/store/apps/details?id=com.darko.medenica.happywick"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="store-badge"
+          >
+            <svg
+              width="219"
+              height="64"
+              viewBox="0 0 219 64"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_cta_17580_62811)">
+                <rect x="0.976562" width="217.6" height="64" rx="8" fill="none" />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M209.457 63.36H8.97656C4.49656 63.36 0.976562 59.84 0.976562 55.36V8C0.976562 3.68 4.65656 0 8.97656 0H209.457C213.937 0 217.457 3.52 217.457 8V55.52C217.457 59.84 213.937 63.36 209.457 63.36Z"
+                  fill="none"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M77.0959 17.0416C77.0959 18.3216 76.6159 19.4416 75.9759 20.2416C75.0159 21.0416 73.7359 21.5216 72.2959 21.5216C71.0159 21.5216 69.7359 21.0416 68.7759 20.0816C67.8159 19.1216 67.3359 18.0016 67.3359 16.5616C67.3359 15.1216 67.8159 14.0016 68.7759 13.0416C69.7359 12.0816 70.8559 11.6016 72.2959 11.6016C72.9359 11.6016 73.5759 11.7616 74.2159 12.0816C75.0159 12.2416 75.4959 12.5616 75.8159 13.0416L75.0159 13.8416C74.3759 13.2016 73.4159 12.7216 72.2959 12.7216C71.3359 12.7216 70.3759 13.2016 69.7359 13.8416C68.9359 14.4816 68.6159 15.4416 68.6159 16.5616C68.6159 17.6816 68.9359 18.6416 69.7359 19.2816C70.5359 19.9216 71.3359 20.4016 72.2959 20.4016C73.4159 20.4016 74.2159 20.0816 75.0159 19.2816C75.4959 18.8016 75.8159 18.1616 75.8159 17.3616H72.2959V16.2416H76.9359C77.0959 16.5616 77.0959 16.7216 77.0959 17.0416Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M72.2928 11.7984C70.9057 11.7984 69.8367 12.2574 68.9142 13.1799C67.9918 14.1023 67.5328 15.1714 67.5328 16.5584C67.5328 17.9455 67.9918 19.0146 68.9142 19.937C69.8343 20.8571 71.0623 21.3184 72.2928 21.3184C73.68 21.3184 74.9082 20.8589 75.8292 20.0977C76.4377 19.3303 76.8928 18.2598 76.8928 17.0384C76.8928 16.8745 76.8923 16.7719 76.8755 16.6713C76.8639 16.6017 76.8437 16.5294 76.8052 16.4384H72.4928V17.1584H76.0128V17.3584C76.0128 18.217 75.6676 18.9065 75.1542 19.4199C74.7396 19.8345 74.318 20.1315 73.8485 20.3235C73.3792 20.5156 72.8723 20.5984 72.2928 20.5984C71.2618 20.5984 70.4162 20.0812 69.6079 19.4346C68.7445 18.7439 68.4128 17.7153 68.4128 16.5584C68.4128 15.4055 68.7422 14.3799 69.5992 13.6892C70.2695 13.0228 71.2743 12.5184 72.2928 12.5184C73.389 12.5184 74.3394 12.9555 75.0091 13.5593L75.5506 13.0178C75.2669 12.6611 74.8523 12.4103 74.1736 12.2746L74.1473 12.2693L74.1234 12.2573C73.5078 11.9496 72.8983 11.7984 72.2928 11.7984ZM68.6314 12.897C69.629 11.8994 70.7999 11.3984 72.2928 11.3984C72.9593 11.3984 73.6217 11.5633 74.2783 11.8877C75.1038 12.0577 75.6276 12.4001 75.9792 12.9275L76.0702 13.0639L75.0128 14.1213L74.8714 13.9799C74.2653 13.3737 73.3548 12.9184 72.2928 12.9184C71.3952 12.9184 70.4839 13.3702 69.8742 13.9799L69.8585 13.9956C69.1219 14.5848 68.8128 15.4753 68.8128 16.5584C68.8128 17.6416 69.1212 18.533 69.8577 19.1223C70.6495 19.7556 71.4038 20.1984 72.2928 20.1984C72.8333 20.1984 73.2864 20.1213 73.6971 19.9533C74.1076 19.7854 74.486 19.5224 74.8714 19.137C75.2771 18.7313 75.5575 18.2069 75.6055 17.5584H72.0928V16.0384H77.0564L77.1117 16.149C77.1982 16.322 77.246 16.4612 77.2701 16.6056C77.2928 16.742 77.2928 16.8765 77.2928 17.0285V17.0384C77.2928 18.3686 76.7942 19.5318 76.129 20.3634L76.1164 20.3791L76.1008 20.3921C75.1035 21.2232 73.7778 21.7184 72.2928 21.7184C70.9633 21.7184 69.6313 21.2198 68.6314 20.2199C67.6338 19.2223 67.1328 18.0514 67.1328 16.5584C67.1328 15.0655 67.6338 13.8946 68.6314 12.897Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M84.3969 13.0456H80.0769V16.0856H84.0769V17.2056H80.0769V20.2456H84.3969V21.3656H78.7969V11.7656H84.3969V13.0456Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M78.5938 11.5625H84.5938V13.2425H80.2738V15.8825H84.2738V17.4025H80.2738V20.0425H84.5938V21.5625H78.5938V11.5625ZM78.9938 11.9625V21.1625H84.1938V20.4425H79.8738V17.0025H83.8738V16.2825H79.8738V12.8425H84.1938V11.9625H78.9938Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M89.6953 21.3656H88.4153V13.0456H85.6953V11.7656H92.4153V13.0456H89.6953V21.3656Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M85.4922 11.5625H92.6122V13.2425H89.8922V21.5625H88.2122V13.2425H85.4922V11.5625ZM85.8922 11.9625V12.8425H88.6122V21.1625H89.4922V12.8425H92.2122V11.9625H85.8922Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M97.1641 21.3656V11.7656H98.444V21.3656H97.1641Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M96.9609 11.5625H98.6409V21.5625H96.9609V11.5625ZM97.3609 11.9625V21.1625H98.2409V11.9625H97.3609Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M103.891 21.3656H102.611V13.0456H99.8906V11.7656H106.611V13.0456H103.891V21.3656Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M99.6875 11.5625H106.808V13.2425H104.088V21.5625H102.408V13.2425H99.6875V11.5625ZM100.088 11.9625V12.8425H102.808V21.1625H103.688V12.8425H106.408V11.9625H100.088Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M119.035 20.0816C118.075 21.0416 116.955 21.5216 115.515 21.5216C114.075 21.5216 112.955 21.0416 111.995 20.0816C111.035 19.1216 110.555 18.0016 110.555 16.5616C110.555 15.1216 111.035 14.0016 111.995 13.0416C112.955 12.0816 114.075 11.6016 115.515 11.6016C116.955 11.6016 118.075 12.0816 119.035 13.0416C119.995 14.0016 120.475 15.1216 120.475 16.5616C120.475 18.0016 119.995 19.1216 119.035 20.0816ZM112.955 19.2816C113.595 19.9216 114.555 20.4016 115.515 20.4016C116.475 20.4016 117.435 20.0816 118.075 19.2816C118.875 18.6416 119.195 17.6816 119.195 16.5616C119.195 15.4416 118.875 14.6416 118.235 13.8416C117.595 13.2016 116.635 12.7216 115.675 12.7216C114.555 12.7216 113.595 13.2016 112.955 13.8416C112.155 14.6416 111.835 15.4416 111.835 16.5616C111.835 17.6816 112.155 18.6416 112.955 19.2816Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M115.512 11.7984C114.125 11.7984 113.055 12.2574 112.133 13.1799C111.211 14.1023 110.752 15.1714 110.752 16.5584C110.752 17.9455 111.211 19.0146 112.133 19.937C113.055 20.8594 114.125 21.3184 115.512 21.3184C116.899 21.3184 117.968 20.8594 118.89 19.937C119.813 19.0146 120.272 17.9455 120.272 16.5584C120.272 15.1714 119.813 14.1023 118.89 13.1799C117.968 12.2574 116.899 11.7984 115.512 11.7984ZM111.85 12.897C112.848 11.8994 114.019 11.3984 115.512 11.3984C117.004 11.3984 118.175 11.8994 119.173 12.897C120.171 13.8946 120.672 15.0655 120.672 16.5584C120.672 18.0514 120.171 19.2223 119.173 20.2199C118.175 21.2174 117.004 21.7184 115.512 21.7184C114.019 21.7184 112.848 21.2174 111.85 20.2199C110.853 19.2223 110.352 18.0514 110.352 16.5584C110.352 15.0655 110.853 13.8946 111.85 12.897ZM112.81 13.697C113.484 13.0231 114.494 12.5184 115.672 12.5184C116.694 12.5184 117.703 13.0267 118.373 13.697L118.389 13.7127L118.388 13.7135C119.054 14.5464 119.392 15.3899 119.392 16.5584C119.392 17.7075 119.064 18.7301 118.214 19.4207C117.526 20.2682 116.507 20.5984 115.512 20.5984C114.493 20.5984 113.488 20.0941 112.818 19.4277C111.961 18.737 111.632 17.7114 111.632 16.5584C111.632 15.9789 111.714 15.4721 111.906 15.0027C112.099 14.5332 112.396 14.1116 112.81 13.697ZM115.672 12.9184C114.61 12.9184 113.699 13.3737 113.093 13.9799C112.708 14.3652 112.445 14.7437 112.277 15.1542C112.109 15.5648 112.032 16.018 112.032 16.5584C112.032 17.6416 112.34 18.533 113.077 19.1223L113.094 19.1361L113.093 19.137C113.703 19.7467 114.614 20.1984 115.512 20.1984C116.43 20.1984 117.324 19.8931 117.915 19.1535L117.929 19.1361L117.947 19.1223C118.683 18.533 118.992 17.6416 118.992 16.5584C118.992 15.4911 118.691 14.7362 118.082 13.9721C117.473 13.3663 116.565 12.9184 115.672 12.9184Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M122.266 21.3656V11.7656H123.706L128.346 19.2856H128.506L128.346 17.3656V11.7656L129.626 11.7656V21.3656H128.346L123.386 13.5256V15.4456V21.3656H122.266Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M122.062 11.5625H123.814L128.259 18.7659L128.142 17.3625L128.142 11.5625L129.822 11.5625V21.5625H128.232L123.582 14.2127V21.5625H122.062V11.5625ZM122.463 11.9625V21.1625H123.182V12.8323L128.453 21.1625H129.422V11.9625H128.542V17.3542L128.72 19.4825H128.231L123.591 11.9625H122.463Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M110.255 35.195C106.575 35.195 103.375 38.075 103.375 41.915C103.375 45.755 106.415 48.635 110.255 48.635C114.095 48.635 117.135 45.755 117.135 41.915C117.135 38.075 114.095 35.195 110.255 35.195ZM110.255 46.075C108.175 46.075 106.415 44.315 106.415 41.915C106.415 39.515 108.175 37.755 110.255 37.755C112.335 37.755 114.095 39.355 114.095 41.915C114.095 44.315 112.335 46.075 110.255 46.075ZM95.3747 35.195C91.5347 35.195 88.4947 38.075 88.4947 41.915C88.4947 45.755 91.5347 48.635 95.3747 48.635C99.2147 48.635 102.255 45.755 102.255 41.915C102.255 38.075 99.0547 35.195 95.3747 35.195ZM95.3747 46.075C93.2947 46.075 91.5347 44.315 91.5347 41.915C91.5347 39.515 93.2947 37.755 95.3747 37.755C97.4547 37.755 99.2147 39.355 99.2147 41.915C99.2147 44.315 97.4547 46.075 95.3747 46.075ZM77.6147 37.275V40.155H84.4947C84.3347 41.755 83.6947 42.875 82.8947 43.675C81.9347 44.635 80.3347 45.755 77.6147 45.755C73.2947 45.755 70.0947 42.395 70.0947 38.075C70.0947 33.755 73.4547 30.395 77.6147 30.395C79.8547 30.395 81.6147 31.355 82.8947 32.475L84.9747 30.395C83.2147 28.795 80.9747 27.515 77.7747 27.515C71.8547 27.515 67.0547 32.155 67.0547 37.915C67.0547 43.675 72.0147 48.315 77.7747 48.315C80.9747 48.315 83.3747 47.355 85.1347 45.435C87.0547 43.515 87.6947 40.955 87.6947 38.715C87.6947 38.075 87.6947 37.435 87.5347 36.955H77.6147V37.275ZM150.255 39.515C149.615 38.075 148.015 35.195 144.335 35.195C140.815 35.195 137.935 37.915 137.935 41.915C137.935 45.755 140.815 48.635 144.655 48.635C147.855 48.635 149.615 46.715 150.415 45.595L148.015 43.995C147.215 45.115 146.255 45.915 144.655 45.915C143.215 45.915 142.095 45.275 141.295 43.835L150.415 40.155L150.255 39.515ZM140.975 41.755C140.975 39.195 143.055 37.755 144.495 37.755C145.615 37.755 146.735 38.395 147.055 39.195L140.975 41.755ZM133.455 48.315H136.495V28.475H133.455V48.315ZM128.655 36.795C127.855 35.995 126.575 35.355 124.975 35.355C121.615 35.355 118.415 38.395 118.415 42.075C118.415 45.915 121.615 48.795 124.975 48.795C126.575 48.795 127.855 48.155 128.495 47.195H128.655V48.155C128.655 50.715 127.215 52.155 124.975 52.155C123.215 52.155 121.935 50.875 121.615 49.755L119.055 50.875C119.855 52.635 121.775 54.875 125.135 54.875C128.655 54.875 131.695 52.795 131.695 47.835V35.675H128.815V36.795H128.655ZM125.135 46.075C123.055 46.075 121.295 44.315 121.295 42.075C121.295 39.675 123.055 37.915 125.135 37.915C127.215 37.915 128.815 39.675 128.815 42.075C128.815 44.315 127.215 46.075 125.135 46.075ZM164.335 28.475H157.135V48.315H160.175V40.795H164.335C167.695 40.795 170.895 38.395 170.895 34.715C170.895 30.875 167.535 28.475 164.335 28.475ZM164.335 38.075H160.015V31.355H164.335C166.575 31.355 167.855 33.115 167.855 34.715C167.855 36.155 166.575 38.075 164.335 38.075ZM182.895 35.195C180.655 35.195 178.415 36.155 177.615 38.235L180.335 39.355C180.975 38.235 181.935 37.915 183.055 37.915C184.655 37.915 186.255 38.875 186.255 40.475V40.635C185.775 40.315 184.495 39.835 183.055 39.835C180.175 39.835 177.295 41.435 177.295 44.315C177.295 47.035 179.695 48.635 182.255 48.635C184.335 48.635 185.455 47.675 186.095 46.715H186.255V48.315H189.135V40.635C188.975 37.115 186.255 35.195 182.895 35.195ZM182.575 46.075C181.615 46.075 180.175 45.595 180.175 44.475C180.175 42.875 181.935 42.395 183.375 42.395C184.655 42.395 185.295 42.715 186.095 43.035C185.775 44.795 184.175 46.075 182.575 46.075ZM199.535 35.675L196.175 44.315H196.015L192.495 35.675H189.295L194.575 47.675L191.375 54.235H194.575L202.735 35.515H199.535V35.675ZM172.495 48.315H175.535V28.475H172.495V48.315Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M40.1078 29.8778L44.8778 25.1078L22.5383 12.2288L40.1078 29.8778ZM18.0068 11.1953C16.9733 11.7518 16.2578 12.7853 16.2578 14.0573V49.1168C16.2578 50.3888 16.9733 51.4223 18.0068 51.8993L38.3588 31.5473L18.0068 11.1953ZM51.7943 29.1623L47.1038 26.4593L41.8568 31.5473L47.1038 36.7148L51.8738 34.0118C53.3048 32.8988 53.3048 30.2753 51.7943 29.1623ZM22.5383 50.8658L44.8778 38.0663L40.1078 33.2963L22.5383 50.8658Z"
+                  fill="currentColor"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_cta_17580_62811">
+                  <rect x="0.976562" width="217.6" height="64" rx="8" fill="currentColor" />
+                </clipPath>
+              </defs>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
     <footer>
-      <p>© 2026 Happy Wick · All rights reserved.</p>
-      <div class="foot-links">
-        <a href="/support">Support</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-        <a href="/delete-account">Delete Account</a>
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <img src="images/happy-wick-logo.png" alt="Happy Wick" class="foot-brand-logo" />
+            <p style="max-width: 320px; font-size: 0.88rem; line-height: 1.6">
+              Your daily crypto market briefing — prices, sentiment, wallets and alerts in one app.
+            </p>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h6>Other Products</h6>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.happywick.minigames"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Minigame</a
+            >
+          </div>
+          <div class="col-6 col-lg-2">
+            <h6>Company</h6>
+            <a href="support.html">Support</a>
+            <a href="https://x.com/HappyWickApp" target="_blank" rel="noopener noreferrer"
+              >X / Twitter</a
+            >
+          </div>
+          <div class="col-6 col-lg-2">
+            <h6>Legal</h6>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h6>Account</h6>
+            <a href="delete-account.html">Delete Account</a>
+          </div>
+        </div>
+        <div class="foot-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+          <span>© 2026 Happy Wick. All rights reserved.</span>
+          <span class="foot-dev">
+            Developed by <img src="images/giuXpert.png" alt="giuXpert" class="foot-dev-logo" />
+          </span>
+        </div>
       </div>
     </footer>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      /* ── BACKGROUND FLOAT ANIMATION ── */
-      (function () {
-        const canvas = document.getElementById('heroBg');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        const SHAPES = ['candlestick'];
-        const COLORS = [
-          [255, 255, 255],   // white
-          [0, 212, 200],     // teal
-          [180, 140, 255],   // lavender
-        ];
-
-        function resize() {
-          canvas.width = canvas.offsetWidth;
-          canvas.height = canvas.offsetHeight;
-        }
-
-        function randomEdgeSpawn(w, h) {
-          const side = Math.floor(Math.random() * 4);
-          if (side === 0) return { x: Math.random() * w, y: h + 60 };
-          if (side === 1) return { x: Math.random() * w, y: -60 };
-          if (side === 2) return { x: -60, y: Math.random() * h };
-          return { x: w + 60, y: Math.random() * h };
-        }
-
-        function makeParticle(fromEdge) {
-          const w = canvas.width, h = canvas.height;
-          const pos = fromEdge ? randomEdgeSpawn(w, h) : { x: Math.random() * w, y: Math.random() * h };
-          const color = COLORS[Math.floor(Math.random() * COLORS.length)];
-          const speed = 0.18 + Math.random() * 0.22;
-          const angle = Math.random() * Math.PI * 2;
-          return {
-            x: pos.x,
-            y: pos.y,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed - 0.08,
-            size: 56 + Math.random() * 128,
-            opacity: 0.04 + Math.random() * 0.07,
-            rotation: Math.random() * Math.PI * 2,
-            rotSpeed: (Math.random() - 0.5) * 0.004,
-            shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
-            r: color[0], g: color[1], b: color[2],
-          };
-        }
-
-        function initParticles() {
-          particles = [];
-          const count = Math.max(40, Math.floor((canvas.width * canvas.height) / 16000));
-          for (let i = 0; i < count; i++) particles.push(makeParticle(false));
-        }
-
-        function drawCandlestick(ctx, s) {
-          const bh = s * 0.48, bw = s * 0.32;
-          ctx.beginPath();
-          ctx.moveTo(0, -s * 0.5);
-          ctx.lineTo(0, -bh / 2);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.rect(-bw / 2, -bh / 2, bw, bh);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(0, bh / 2);
-          ctx.lineTo(0, s * 0.5);
-          ctx.stroke();
-        }
-
-        function drawDiamond(ctx, s) {
-          const r = s * 0.5;
-          ctx.beginPath();
-          ctx.moveTo(0, -r);
-          ctx.lineTo(r * 0.62, 0);
-          ctx.lineTo(0, r);
-          ctx.lineTo(-r * 0.62, 0);
-          ctx.closePath();
-          ctx.stroke();
-        }
-
-        function drawRing(ctx, s) {
-          ctx.beginPath();
-          ctx.arc(0, 0, s * 0.42, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-
-        function drawHexagon(ctx, s) {
-          const r = s * 0.44;
-          ctx.beginPath();
-          for (let i = 0; i < 6; i++) {
-            const a = (Math.PI / 3) * i - Math.PI / 6;
-            i === 0 ? ctx.moveTo(r * Math.cos(a), r * Math.sin(a))
-                    : ctx.lineTo(r * Math.cos(a), r * Math.sin(a));
-          }
-          ctx.closePath();
-          ctx.stroke();
-        }
-
-        function drawCross(ctx, s) {
-          const r = s * 0.42, t = s * 0.12;
-          ctx.beginPath();
-          ctx.rect(-t / 2, -r, t, r * 2);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.rect(-r, -t / 2, r * 2, t);
-          ctx.stroke();
-        }
-
-        function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          const margin = 80;
-          const w = canvas.width, h = canvas.height;
-
-          particles.forEach((p, i) => {
-            p.x += p.vx;
-            p.y += p.vy;
-            p.rotation += p.rotSpeed;
-
-            if (p.x < -margin || p.x > w + margin || p.y < -margin || p.y > h + margin) {
-              particles[i] = makeParticle(true);
-              return;
-            }
-
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(p.rotation);
-            ctx.strokeStyle = `rgba(${p.r},${p.g},${p.b},${p.opacity})`;
-            ctx.lineWidth = 1.4;
-
-            if (p.shape === 'candlestick') drawCandlestick(ctx, p.size);
-            else if (p.shape === 'diamond')    drawDiamond(ctx, p.size);
-            else if (p.shape === 'ring')       drawRing(ctx, p.size);
-            else if (p.shape === 'hexagon')    drawHexagon(ctx, p.size);
-            else                               drawCross(ctx, p.size);
-
-            ctx.restore();
-          });
-
-          requestAnimationFrame(animate);
-        }
-
-        resize();
-        initParticles();
-        animate();
-
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => { resize(); initParticles(); }, 150);
-        });
-      })();
-
-
+      window.addEventListener('scroll', function () {
+        document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 10);
+      });
     </script>
+
+    <!-- Cloudflare Web Analytics -->
+    <script
+      type="module"
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "a2615835d6644ad5b0c98f97fc6fed60"}'
+    ></script>
+    <!-- End Cloudflare Web Analytics -->
   </body>
 </html>
