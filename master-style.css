@@ -248,6 +248,7 @@ h6 {
 }
 #alerts {
   padding-bottom: 30px;
+  background: var(--bg-light);
 }
 #market {
   background: var(--bg-light);
@@ -321,6 +322,7 @@ h6 {
 /* ── MASCOTS / MINIGAME (index-2) ── */
 #mascots {
   padding: 0;
+  margin-top: 40px;
 }
 .mascot-banner {
   border-radius: 24px;
