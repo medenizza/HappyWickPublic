@@ -342,6 +342,39 @@ h6 {
   }
 }
 
+/* ── Other products ── */
+#products {
+  min-height: 0;
+  padding: 0;
+}
+.product-box {
+  background: #060513;
+  padding: 80px 0;
+  color: #fff;
+}
+.product-box .section-eyebrow {
+  color: #a78bfa;
+}
+.product-box .section-title {
+  color: #fff;
+  margin-bottom: 0;
+}
+.product-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 40px auto 0;
+  border-radius: 16px;
+}
+@media (max-width: 767px) {
+  .product-box {
+    padding: 50px 0;
+  }
+  .product-box .section-title {
+    font-size: 2rem;
+  }
+}
+
 /* ── CTA (index-2) ── */
 #cta {
   padding: 90px 0;
